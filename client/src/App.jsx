@@ -11,10 +11,10 @@ const App = () => {
         <Route path="/" element={<PageWrapper />}>
           {/* <Route index element={<Pages.LandingPage />} /> */}
           <Route path="home" element={<Pages.HomePage />} />
-          {/* <Route path="calendar" element={<Pages.CalendarPage />} />
-          <Route path="todo/:id" element={<Pages.TodoPage />} />
-          <Route path="login" element={<Pages.LoginPage />} />
-          <Route path="*" element={<Pages.NotFoundPage />} /> */}
+          <Route path="calendar" element={<Pages.CalendarPage />} />
+          {/* <Route path="todo/:id" element={<Pages.TodoPage />} />
+          <Route path="login" element={<Pages.LoginPage />} /> */}
+          <Route path="*" element={<Pages.NotFoundPage />} />
         </Route>
       </Routes>
     </>
