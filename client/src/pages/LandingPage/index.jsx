@@ -27,8 +27,9 @@ const LandingPage = () => {
       <h1>Calendar To Do List</h1>
       <p>Welcome to <b>Calendar To Do List</b>, the world's most famous scheduling site!</p>
       <p>Be able to add/remove tasks and get rewarded with points from a to-do list connected to a calendar</p>
-      <Link to="/login" style={linkStyle}>Start Now</Link>
-
+      <button>
+        <Link to="/login" style={linkStyle}>Start Now</Link>
+      </button>
       <section
         style={{
           opacity: revealAbout ? 1 : 0,
