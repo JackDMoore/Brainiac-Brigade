@@ -23,7 +23,7 @@ describe("Calendar Page", () => {
 
   it("Displays a calendar", () => {
     const calendar = screen.getByRole("Calendar");
-    expect(calendar).toBeInTheDocument
+    expect(calendar).toBeInTheDocument();
   })
 
 })
