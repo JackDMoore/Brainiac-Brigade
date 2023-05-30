@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">72.34% </span>
+                <span class="strong">89.36% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>34/47</span>
+                <span class='fraction'>42/47</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">75% </span>
+                <span class="strong">60% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>3/4</span>
+                <span class='fraction'>3/5</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">72.34% </span>
+                <span class="strong">89.36% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>34/47</span>
+                <span class='fraction'>42/47</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line medium'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -127,9 +127,6 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
@@ -146,11 +143,14 @@
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
@@ -170,12 +170,9 @@ const LandingPage = () =&gt; {
   useEffect(() =&gt; {
     const handleScroll = <span class="fstat-no" title="function not covered" >() =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >      const scrollPosition = window.scrollY;</span>
-<span class="cstat-no" title="statement not covered" >      const revealPosition = window.innerHeight * 0.7; </span>
+<span class="cstat-no" title="statement not covered" >      const revealPosition = window.innerHeight * 0.4;</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >      console.log('Scroll Position:', scrollPosition);</span>
-<span class="cstat-no" title="statement not covered" >      console.log('Reveal Position:', revealPosition);</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >      setRevealAbout(scrollPosition &gt; revealPosition);</span>
+<span class="cstat-no" title="statement not covered" >      setRevealAbout(scrollPosition &gt;= revealPosition);</span>
 <span class="cstat-no" title="statement not covered" >    };</span>
 &nbsp;
     window.addEventListener('scroll', handleScroll);
@@ -189,16 +186,19 @@ const LandingPage = () =&gt; {
       &lt;h1&gt;Calendar To Do List&lt;/h1&gt;
       &lt;p&gt;Welcome to &lt;b&gt;Calendar To Do List&lt;/b&gt;, the world's most famous scheduling site!&lt;/p&gt;
       &lt;p&gt;Be able to add/remove tasks and get rewarded with points from a to-do list connected to a calendar&lt;/p&gt;
-        &lt;Link to="/login" style={linkStyle}&gt;Start Now&lt;/Link&gt;
-      
+      &lt;Link to="/login" style={linkStyle}&gt;Start Now&lt;/Link&gt;
 &nbsp;
-      {<span class="branch-0 cbranch-no" title="branch not covered" >revealAbout &amp;&amp; (</span>
-<span class="cstat-no" title="statement not covered" >        &lt;section&gt;</span>
-<span class="cstat-no" title="statement not covered" >          &lt;h2&gt;About Us&lt;/h2&gt;</span>
-<span class="cstat-no" title="statement not covered" >          &lt;p&gt;We wanted to create a place where students can revise and prepare by planning their tasks out.&lt;/p&gt;</span>
-<span class="cstat-no" title="statement not covered" >          &lt;p&gt;We did this by creating a calendar app with a to do list that gives points for each task completed.&lt;/p&gt;</span>
-<span class="cstat-no" title="statement not covered" >        &lt;/section&gt;</span>
-      )}
+      &lt;section
+        style={{
+          opacity: <span class="branch-0 cbranch-no" title="branch not covered" >revealAbout ? 1 : 0</span>,
+          transform: `translateY(${<span class="branch-0 cbranch-no" title="branch not covered" >revealAbout ? '0' : '</span>20px'})`,
+          transition: 'opacity 0.5s ease, transform 0.5s ease'
+        }}
+      &gt;
+        &lt;h2&gt;About Us&lt;/h2&gt;
+        &lt;p&gt;We wanted to create a place where students can revise and prepare by planning their tasks out.&lt;/p&gt;
+        &lt;p&gt;We did this by creating a calendar app with a to-do list that gives points for each completed task.&lt;/p&gt;
+      &lt;/section&gt;
     &lt;/main&gt;
   );
 };
@@ -211,7 +211,7 @@ export default LandingPage;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-05-30T15:30:39.026Z
+                at 2023-05-30T16:48:26.184Z
             </div>
         <script src="../../prettify.js"></script>
         <script>
