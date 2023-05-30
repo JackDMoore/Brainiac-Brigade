@@ -5,6 +5,7 @@ const mongoose = require('mongoose')
 require('dotenv').config()
 
 const eventsRouter = require('./routes/events')
+const usersRouter = require('./routes/users')
 
 const app = express()
 
@@ -34,6 +35,7 @@ app.get('/', (req, res) => {
 })
 
 app.use('/events', eventsRouter)
+app.use('/users', usersRouter)
 
 
 

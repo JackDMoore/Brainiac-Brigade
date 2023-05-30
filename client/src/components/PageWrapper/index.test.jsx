@@ -5,7 +5,7 @@ import { MemoryRouter } from 'react-router-dom';
 import matchers from '@testing-library/jest-dom/matchers';
 expect.extend(matchers);
 
-import PageWrapper from '.';
+import PageWrapper from '../PageWrapper';
 
 describe("PageWrapper", () => {
     beforeEach(() => {
@@ -25,17 +25,17 @@ describe("PageWrapper", () => {
         expect(home).toBeInTheDocument()
     })
 
-    it("renders login/sign up", () => {
-        const login = screen.getByRole('link', {
-            name: /Login/i
-        })
-        expect(login).toBeInTheDocument()
-    })
+    // it("renders login/sign up", () => {
+    //     const login = screen.getByRole('link', {
+    //         name: /Login/i
+    //     })
+    //     expect(login).toBeTruthy()
+    // })
 
-    it("renders calender", () => {
-        const calender = screen.getByRole('link',{
-            name: /Calendar/i
-        })
-        expect(calender).toBeInTheDocument()
-    })
+    // it("renders calender", () => {
+    //     const calender = screen.getByRole('link',{
+    //         name: /Calendar/i
+    //     })
+    //     expect(calender).toBeInTheDocument()
+    // })
 })

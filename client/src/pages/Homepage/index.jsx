@@ -1,40 +1,40 @@
 import React from 'react';
-import { BrowserRouter as Router, Link, Route } from 'react-router-dom';
-import UrgentTasks from './UrgentTasks';
-import CalendarPage from './CalendarPage';
-import AchievementsPage from './AchievementsPage';
+import { Router, Link, Route } from 'react-router-dom';
+// import UrgentTasks from './UrgentTasks';
+// import CalendarPage from './CalendarPage';
+// import AchievementsPage from './AchievementsPage';
+
+// const HomePage = () => {
+//   return (
+//     // <Router>
+//       <div>
+//         {/* <nav>
+//           <ul>
+//             <li>
+//               <Link to="/">Home</Link>
+//             </li>
+//             <li>
+//               <Link to="/urgent-tasks">Urgent Tasks</Link>
+//             </li>
+//             <li>
+//               <Link to="/calendar">Calendar</Link>
+//             </li>
+//             <li>
+//               <Link to="/achievements">Achievements</Link>
+//             </li>
+//           </ul>
+//         </nav> */}
+
+//         {/* <Route path="/" exact component={Home} /> */}
+//         {/* <Route path="/urgent-tasks" component={UrgentTasks} />
+//         <Route path="/calendar" component={CalendarPage} />
+//         <Route path="/achievements" component={AchievementsPage} /> */}
+//       {/* </div> */}
+//     // </Router>
+//   );
+// };
 
 const HomePage = () => {
-  return (
-    <Router>
-      <div>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/urgent-tasks">Urgent Tasks</Link>
-            </li>
-            <li>
-              <Link to="/calendar">Calendar</Link>
-            </li>
-            <li>
-              <Link to="/achievements">Achievements</Link>
-            </li>
-          </ul>
-        </nav>
-
-        <Route path="/" exact component={Home} />
-        <Route path="/urgent-tasks" component={UrgentTasks} />
-        <Route path="/calendar" component={CalendarPage} />
-        <Route path="/achievements" component={AchievementsPage} />
-      </div>
-    </Router>
-  );
-};
-
-const Home = () => {
   return (
     <div>
       <h2>Welcome to the Homepage!</h2>
