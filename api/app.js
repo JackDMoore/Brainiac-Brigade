@@ -1,30 +1,40 @@
 const express = require('express')
 const cors = require('cors')
 const morgan = require('morgan')
-// const mongoose = require('mongoose')
+const mongoose = require('mongoose')
 require('dotenv').config()
 
-
+const eventsRouter = require('./routes/events')
 
 const app = express()
-
 
 app.use(cors())
 app.use(express.json())
 app.use(morgan('dev'))
 
+// connecting to mongoDB
+const connectDB = async () => {
+  try {
+    await mongoose.connect(process.env.MONGODB_URI)
+    console.log('connected to MongoDB')
 
-// mongoose.connect(process.env.MONGODB_URI)
-//   .then(result => {
-//     logger.info('connected to MongoDB')
-//   })
-//   .catch((error) => {
-//     logger.info('error connecting to MongoDB', error.message)
-//   })
+  } catch (error) {
+    console.log('error connecting to MongoDB', error.message)
+  }
+
+}
+
+connectDB()
 
 app.get('/', (req, res) => {
-  res.send('Welcome!')
+  res.json({
+    name: 'Brainiac Brigade',
+    description: 'Organize your tasks'
+  })
 })
+
+app.use('/events', eventsRouter)
+
 
 
 module.exports = app
