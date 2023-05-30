@@ -1,8 +1,8 @@
 import React from 'react';
-import { BrowserRouter as Router, Link, Route } from 'react-router-dom';
-import UrgentTasks from './UrgentTasks';
-import CalendarPage from './CalendarPage';
-import AchievementsPage from './AchievementsPage';
+import { Router, Link, Route } from 'react-router-dom';
+// import UrgentTasks from './UrgentTasks';
+// import CalendarPage from './CalendarPage';
+// import AchievementsPage from './AchievementsPage';
 
 const HomePage = () => {
   return (
