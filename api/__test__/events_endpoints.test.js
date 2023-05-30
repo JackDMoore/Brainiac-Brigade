@@ -1,5 +1,6 @@
 const app = require('../app')
 const supertest = require('supertest')
+const mongoose = require('mongoose')
 
 const Event = require('../models/Event')
 
@@ -27,4 +28,9 @@ describe('api server', () => {
   })
 
 
+})
+
+
+afterAll(() => {
+  mongoose.connection.close()
 })
