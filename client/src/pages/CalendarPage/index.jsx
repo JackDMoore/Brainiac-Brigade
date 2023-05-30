@@ -7,7 +7,7 @@ const CalendarPage = () => {
 
   return (
     <div className="app">
-      <h1 className="header">React Calendar</h1>
+      <h1 className="header">Calendar</h1>
       <div className="calendar-container">
         <Calendar onChange={setDate} value={date} />
       </div>
