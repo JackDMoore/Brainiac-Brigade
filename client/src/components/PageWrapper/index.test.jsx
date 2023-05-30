@@ -27,14 +27,14 @@ describe("PageWrapper", () => {
 
     it("renders login/sign up", () => {
         const login = screen.getByRole('link', {
-            name: /login/i
+            name: /Login/i
         })
         expect(login).toBeInTheDocument()
     })
 
     it("renders calender", () => {
         const calender = screen.getByRole('link',{
-            name: /calender/i
+            name: /Calendar/i
         })
         expect(calender).toBeInTheDocument()
     })
