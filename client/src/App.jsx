@@ -8,7 +8,7 @@ const App = () => {
   return (
     <>
       <Routes>
-        <Route path="/" element={<Pages.PageWrapper />}>
+        <Route path="/" element={<PageWrapper />}>
           <Route index element={<Pages.LandingPage />} />
           <Route path="landing" element={<Pages.HomePage />} />
           <Route path="calendar" element={<Pages.CalendarPage />} />
