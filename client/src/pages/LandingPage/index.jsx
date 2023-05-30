@@ -11,7 +11,7 @@ const LandingPage = () => {
   useEffect(() => {
     const handleScroll = () => {
       const scrollPosition = window.scrollY;
-      const revealPosition = window.innerHeight * 0.1;
+      const revealPosition = window.innerHeight * 0.4;
 
       setRevealAbout(scrollPosition >= revealPosition);
     };
