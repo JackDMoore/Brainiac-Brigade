@@ -1,3 +1,4 @@
+import React from "react";
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
 
@@ -10,11 +11,11 @@ const App = () => {
       <Routes>
         <Route path="/" element={<PageWrapper />}>
           <Route index element={<Pages.LandingPage />} />
-          <Route path="landing" element={<Pages.HomePage />} />
+          {/* <Route path="homepage" element={<Pages.HomePage />} />
           <Route path="calendar" element={<Pages.CalendarPage />} />
           <Route path="todo/:id" element={<Pages.TodoPage />} />
           <Route path="login" element={<Pages.LoginPage />} />
-          <Route path="*" element={<Pages.NotFoundPage />} />
+          <Route path="*" element={<Pages.NotFoundPage />} /> */}
         </Route>
       </Routes>
     </>
