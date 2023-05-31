@@ -46,6 +46,7 @@ const App = () => {
           <Route path="login" element={<Pages.LoginPage />} />
           <Route path="register" element={<Pages.RegisterPage />} />
           <Route path="*" element={<Pages.NotFoundPage />} />
+          <Route path="Achievements" element={<Pages.AchievementsPage />} />
         </Route>
       </Routes>
     </>

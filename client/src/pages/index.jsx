@@ -6,3 +6,5 @@ export { default as NotFoundPage } from './NotFoundPage';
 export { default as CalendarPage } from "./CalendarPage" 
 export { default as RegisterPage} from './RegisterPage'
 export {default as UrgentPage} from "./UrgentPage"
+export { default as AchievementsPage } from './AchievementsPage'
+
