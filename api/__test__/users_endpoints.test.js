@@ -10,7 +10,7 @@ const api = supertest(app)
 
 describe('api server', () => {
 
-  xtest('user creation succeeds with a fresh username', async () => {
+  test('user creation succeeds with a fresh username', async () => {
     const usersAtStart = await User.find({})
 
     const newUser = {
