@@ -5,4 +5,5 @@ export { default as TodoPage } from './TodoPage';
 export { default as NotFoundPage } from './NotFoundPage';
 export { default as CalendarPage } from "./CalendarPage" 
 export { default as RegisterPage} from './RegisterPage'
+export { default as AchievementsPage } from './AchievementsPage'
 
