@@ -2,6 +2,8 @@
 
 Crammar Education have tasked the Brainiac-Brigade with creating an app to add to their education portfolio to support students with revision.
 
+[API](https://brainiac-api.onrender.com/) | [CLIENT](https://brainiac-brigade.onrender.com/)
+
 ## Installation
 
 If you want to run the app in your local machine:
