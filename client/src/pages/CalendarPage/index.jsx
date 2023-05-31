@@ -15,7 +15,7 @@ const CalendarPage = () => {
   return (
     <div className="app">
       <h1 className="header">Calendar</h1>
-      <div className="calendar-container">
+      <div className="calendar-container" id="calendarID">
         <Calendar onChange={handleNavigation} />
       </div>
     </div>
