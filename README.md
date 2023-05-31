@@ -27,14 +27,14 @@ touch .env
 
 # You need to add the following enviroment variables to the .env file:
 
-  # MongoDB URI
+  # MongoDB URI (add your own URI)
   MONGODB_URI: mongodb+srv://username:password@host:port/database?options...
 
   # PORT
   PORT = 3000
 
   # SECRET for JasonWebToken
-  SECRET = "your secret
+  SECRET = "your secret"
 ```
 ### Client
 
