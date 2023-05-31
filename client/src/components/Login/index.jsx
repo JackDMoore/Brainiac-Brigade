@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
 
-const Login = () => {
+const Login = (props) => {
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
 
@@ -18,8 +18,8 @@ const Login = () => {
 
   function gatherDetails(e){
     e.preventDefault()
-    console.log(username)
-    console.log(password)
+    props.callback(username,password)
+    
   }
 
 
@@ -32,7 +32,7 @@ const Login = () => {
         <p>Username: </p>
         <input type='text' aria-label='username input' placeholder='Enter Username' onChange={handleUsername} value={username}></input>
         <p>Password: </p>
-        <input type='text' aria-label='password input' placeholder='Enter Password' onChange={handlePassword} value={password}></input><br/>
+        <input type='password' aria-label='password input' placeholder='Enter Password' onChange={handlePassword} value={password}></input><br/>
         <input type='submit' onClick={gatherDetails}></input>
     </form>
     </>
