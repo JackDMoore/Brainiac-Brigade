@@ -1,4 +1,6 @@
 import React from 'react'
+import { useState } from 'react'
+import axios from 'axios'
 
 const Register = () => {
     const [username, setUsername] = useState("")
@@ -19,10 +21,12 @@ const Register = () => {
       e.preventDefault()
       try {
       const options = {"username":username, "password":password}
-      const response = await axios.post("http://localhost:3000/users/login", options)
+      const response = await axios.post("http://localhost:3000/users", options)
       console.log(response) 
-      if (response.status == 200) {
-        localStorage.setItem("token",response.data.token)
+      if (response.status == 201) {
+        alert("User created :)")
+        window.location.assign("/login")
+        // console.log("I have suceeded")
       } 
       } catch (error) {
           alert(error.response.data.error)
