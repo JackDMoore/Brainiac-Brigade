@@ -1,8 +1,15 @@
 import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 
 const TodoPage = () => {
+  // getting the date from params
+  const { date } = useParams()
+  // converting data string to date format
+  let showDate = new Date(date)
+
   const [items, setItems] = useState([]);
-  const [currentDate, setCurrentDate] = useState(new Date());
+  // setting initial date to be the one coming from params
+  const [currentDate, setCurrentDate] = useState(showDate);
   const [points, setPoints] = useState(0);
   const [showDoneTasks, setShowDoneTasks] = useState(true);
   const [outstandingItems, setOutstandingItems] = useState([]);
@@ -29,40 +36,40 @@ const TodoPage = () => {
     const updatedItems = items.map((item) => {
       if (item.id === id) {
         let pointsToAdd = 0;
-  
+
         if (item.done) {
-          
+
           if (item.finish && new Date(item.finish) < currentDate) {
-            
+
             pointsToAdd = 50;
           }
         } else {
-         
+
           if (item.finish && new Date(item.finish) < currentDate) {
-           
+
             pointsToAdd = 50;
           } else {
-           
+
             pointsToAdd = 100;
           }
         }
-  
+
         const updatedItem = { ...item, done: !item.done };
         setPoints((prevPoints) => prevPoints + pointsToAdd);
         return updatedItem;
       }
       return item;
     });
-  
+
     setItems(updatedItems);
   };
-  
+
 
   const handleEditItem = (id, newText, newHours, newDays) => {
     const updatedItems = items.map((item) => {
       if (item.id === id) {
         let finish = null;
-  
+
         if (newHours && newHours !== '') {
           const finishDate = new Date();
           finishDate.setHours(finishDate.getHours() + parseInt(newHours));
@@ -72,21 +79,21 @@ const TodoPage = () => {
           finishDate.setDate(finishDate.getDate() + parseInt(newDays));
           finish = finishDate.toISOString();
         }
-  
+
         return { ...item, text: newText, hours: newHours, days: newDays, finish };
       }
       return item;
     });
-  
+
     setItems(updatedItems);
   };
-  
-  
+
+
   const TodoItem = ({ item, onToggleDone, onEditItem, onDeleteItem }) => {
     const handleToggle = () => {
       onToggleDone(item.id);
     };
-  
+
     const handleEdit = () => {
       const newText = prompt('Enter new text:', item.text);
       if (newText !== null) {
@@ -97,13 +104,13 @@ const TodoPage = () => {
         }
       }
     };
-    
-    
-  
+
+
+
     const handleDelete = () => {
       onDeleteItem(item.id, item.done);
     };
-  
+
     return (
       <li>
         <input type="checkbox" checked={item.done} onChange={handleToggle} />
@@ -113,9 +120,9 @@ const TodoPage = () => {
       </li>
     );
   };
-  
-  
-  
+
+
+
 
   const handleDeleteItem = (id, done) => {
     if (done) {
@@ -149,7 +156,7 @@ const TodoPage = () => {
     setCurrentDate((prevDate) => {
       const newDate = new Date(prevDate);
       newDate.setDate(newDate.getDate() + 1);
-  
+
       const updatedItems = items.map((item) => {
         if (!item.done) {
           const finishDate = new Date(item.start);
@@ -157,23 +164,24 @@ const TodoPage = () => {
           const daysToFinish = parseInt(item.days);
           finishDate.setHours(finishDate.getHours() + hoursToFinish);
           finishDate.setDate(finishDate.getDate() + daysToFinish);
-  
+
           if (finishDate < newDate) {
             return { ...item, start: null, finish: null };
           }
         }
         return item;
       });
-  
+
       setItems(updatedItems);
       return newDate;
     });
   };
-  
+
 
   return (
     <div>
       <h2>{currentDate.toDateString()}</h2>
+      {/* <h2>{showDate.toDateString()}</h2> */}
       <p>Points: {points}</p>
 
       <div>
@@ -289,5 +297,3 @@ const TodoItem = ({ item, onToggleDone, onEditItem, onDeleteItem }) => {
 };
 
 export default TodoPage;
-
-
