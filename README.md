@@ -28,7 +28,7 @@ touch .env
 # You need to add the following enviroment variables to the .env file:
 
   # MongoDB URI
-  MONGODB_URI: mongodb+srv://username:password@host:port/database?options...'
+  MONGODB_URI: mongodb+srv://username:password@host:port/database?options...
 
   # PORT
   PORT = 3000
