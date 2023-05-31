@@ -1,3 +1,5 @@
+<img src="https://github.com/JackDMoore/Brainiac-Brigade/assets/17050237/724f118b-6034-4f85-a1da-f7e389097848" width="100" height="100">
+
 # Brainiac-Brigade Procrastination App
 
 Crammar Education have tasked the Brainiac-Brigade with creating an app to add to their education portfolio to support students with revision.
