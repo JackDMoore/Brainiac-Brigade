@@ -13,6 +13,7 @@ const LoginPage = () => {
     <>
         <h1>Login Page</h1>
         <Login callback={CallBack}/>
+        <p>Not registered? <a href='/register'>Register</a></p>
     </>
   )
 }
