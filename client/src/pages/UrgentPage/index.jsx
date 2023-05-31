@@ -38,7 +38,7 @@ const UrgentPage = ({ tasks, onAddTask, onDeleteTask, onUpdateTask }) => {
   };
 
   return (
-    <div className="urgent-page">
+    <div className="urgent-page" data-testid="urgent-page">
       <h1>Urgent Tasks</h1>
       <div className="side-menu">
         <h3>Color Codes</h3>
@@ -57,7 +57,7 @@ const UrgentPage = ({ tasks, onAddTask, onDeleteTask, onUpdateTask }) => {
           </li>
         </ul>
       </div>
-      <div className="task-list">
+      <div className="task-list" data-testid="task-list">
         {filterTasksByWeek().map((task) => {
           const dueDate = new Date(task.date);
           const daysRemaining = getDaysRemaining(dueDate);
