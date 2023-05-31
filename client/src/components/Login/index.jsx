@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-
+import axios from 'axios'
 
 const Login = (props) => {
   const [username, setUsername] = useState("")
@@ -16,10 +16,18 @@ const Login = (props) => {
     
   }
 
-  function gatherDetails(e){
+  async function gatherDetails(e){
     e.preventDefault()
-    props.callback(username,password)
-    
+    try {
+    const options = {"username":username, "password":password}
+    const response = await axios.post("http://localhost:3000/users/login", options)
+    console.log(response) 
+    if (response.status == 200) {
+      localStorage.setItem("token",response.data.token)
+    } 
+    } catch (error) {
+        alert(error.response.data.error)
+    }
   }
 
 
