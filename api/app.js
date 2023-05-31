@@ -30,7 +30,7 @@ connectDB()
 app.get('/', (req, res) => {
   res.json({
     name: 'Brainiac Brigade',
-    description: 'Organize your tasks'
+    text: 'Organize your tasks'
   })
 })
 

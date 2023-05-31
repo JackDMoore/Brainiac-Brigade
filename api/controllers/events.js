@@ -36,14 +36,14 @@ const create = async(req, res) => {
 
 
   const event = new Event({
-    description: body.description,
-    complete: body.complete || false,
+    text: body.text,
+    done: body.done || false,
     start: body.start,
     end: body.end,
     user: user._id
   })
 
-  if (!event.description) {
+  if (!event.text) {
     res.status(400).end()
   } else {
     const savedEvent = await event.save()
@@ -75,8 +75,8 @@ const update = async(req, res) => {
 
   if (eventToUpdate.user.toString() === user._id.toString()) {
     const event = {
-      description: body.description,
-      complete: body.complete,
+      text: body.text,
+      done: body.done,
       start: body.start,
       end: body.end,
       user: user._id
