@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const TodoPage = () => {
+const TodoPage = ({ tasks, onAddTask }) => {
   const [items, setItems] = useState([]);
   const [currentDate, setCurrentDate] = useState(new Date());
   const [points, setPoints] = useState(0);
@@ -15,15 +15,11 @@ const TodoPage = () => {
   }, [items, currentDate]);
 
   const handleAddItem = (text) => {
-    const newItem = {
-      id: Date.now(),
-      text,
-      hours: null,
-      days: null,
-      done: false,
-    };
-    setItems([...items, newItem]);
-  };
+  const newItem = { id: Date.now(), text, done: false, dueDate: currentDate.toISOString() };
+  setItems([...items, newItem]);
+  onAddTask(text, currentDate.toISOString());
+};
+
 
   const handleToggleDone = (id) => {
     const updatedItems = items.map((item) => {
@@ -37,14 +33,7 @@ const TodoPage = () => {
             pointsToAdd = 50;
           }
         } else {
-         
-          if (item.finish && new Date(item.finish) < currentDate) {
-           
-            pointsToAdd = 50;
-          } else {
-           
-            pointsToAdd = 100;
-          }
+          setPoints((prevPoints) => prevPoints - 100);
         }
   
         const updatedItem = { ...item, done: !item.done };
@@ -119,6 +108,7 @@ const TodoPage = () => {
 
   const handleDeleteItem = (id, done) => {
     if (done) {
+      setPoints((prevPoints) => prevPoints - 100);
       setPoints((prevPoints) => prevPoints - 100);
     }
     const updatedItems = items.filter((item) => item.id !== id);
@@ -213,8 +203,9 @@ const TodoForm = ({ onAddItem }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (text.trim() && hours && days) {
-      onAddItem(text.trim());
+    if (text.trim()) {
+      const dueDate = new Date();
+      onAddItem(text.trim(), dueDate);
       setText('');
       setHours('');
       setDays('');
@@ -255,7 +246,7 @@ const TodoList = ({ items, onToggleDone, onEditItem, onDeleteItem }) => {
           item={item}
           onToggleDone={onToggleDone}
           onEditItem={onEditItem}
-          onDeleteItem={() => onDeleteItem(item.id, item.done)}
+          onDeleteItem={onDeleteItem}
         />
       ))}
     </ul>
@@ -278,12 +269,60 @@ const TodoItem = ({ item, onToggleDone, onEditItem, onDeleteItem }) => {
     onDeleteItem(item.id, item.done);
   };
 
+  const getDaysRemaining = (dueDate) => {
+    const today = new Date();
+    const due = new Date(dueDate);
+    const timeDiff = due.getTime() - today.getTime();
+    const daysRemaining = Math.ceil(timeDiff / (1000 * 3600 * 24));
+    return daysRemaining >= 0 ? daysRemaining : 0;
+  };
+
+  const getTaskColor = (daysRemaining) => {
+    if (daysRemaining >= 7) {
+      return 'yellow';
+    } else if (daysRemaining >= 3 && daysRemaining <= 6) {
+      return 'orange';
+    } else {
+      return 'red';
+    }
+  };
+
+  const daysRemaining = getDaysRemaining(item.dueDate);
+
+  const renderDaysRemaining = () => {
+    if (item.done) {
+      return <span className="completed">Completed</span>;
+    } else {
+      const currentDate = new Date();
+      const dueDate = new Date(item.dueDate);
+      const timeDifference = dueDate.getTime() - currentDate.getTime();
+      const daysRemaining = Math.ceil(timeDifference / (1000 * 3600 * 24));
+  
+      let colorClass = '';
+  
+      if (daysRemaining >= 7) {
+        colorClass = 'yellow';
+      } else if (daysRemaining >= 3 && daysRemaining <= 6) {
+        colorClass = 'orange';
+      } else {
+        colorClass = 'red';
+      }
+  
+      return <span className={colorClass}>{daysRemaining} day(s) remaining</span>;
+    }
+  };
+
+  const taskColor = getTaskColor(daysRemaining);
+
   return (
     <li>
-      <input type="checkbox" checked={item.done} onChange={handleToggle} />
-      <span className={item.done ? 'done' : ''}>{item.text}</span>
-      <button onClick={handleEdit}>Edit</button>
-      <button onClick={handleDelete}>Delete</button>
+      <div>
+        <input type="checkbox" checked={item.done} onChange={handleToggle} />
+        <span className={item.done ? 'done' : ''}>{item.text}</span>
+        <span className={taskColor}>{daysRemaining} days left</span>
+        <button onClick={handleEdit}>Edit</button>
+        <button onClick={handleDelete}>Delete</button>
+      </div>
     </li>
   );
 };

@@ -39,7 +39,7 @@ const HomePage = () => {
     <div>
       <h2>Welcome to the Homepage!</h2>
       <div className="box">
-        <Link to="/urgent-tasks">
+        <Link to="/urgent">
           <h3>Urgent Tasks</h3>
         </Link>
         <p>Click here to view urgent tasks.</p>
