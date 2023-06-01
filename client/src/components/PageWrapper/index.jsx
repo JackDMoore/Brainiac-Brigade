@@ -8,7 +8,7 @@ const PageWrapper = () => {
           <nav>
               <NavLink to="home">Home</NavLink>
               <NavLink to="login">Login</NavLink>
-              <NavLink to="calendar">Calendar</NavLink>
+              <NavLink to="home/calendar">Calendar</NavLink>
           </nav>
       </header>
       <Outlet/>
