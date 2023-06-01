@@ -218,19 +218,20 @@ const TodoPage = () => {
   };
 
   const notificationStyle = {
-    color: 'green',
-    background: 'lightgrey',
+    color: "#FF8E3C",
+    background: '#242424',
     fontSize: 20,
-    borderStyle: 'solid',
-    borderRadius: 5,
+    borderRadius: 25,
     padding: 10,
     marginBottom: 10,
+    marginTop: 20,
+    border: "1px solid #FF8E3C",
   }
 
 
   return (
     <div>
-      <h2>{currentDate.toDateString()}</h2>
+      <h2 className='date-header'>{currentDate.toDateString()}</h2>
       {/* <h2>{showDate.toDateString()}</h2> */}
       <p>Points: {points}</p>
 
@@ -246,10 +247,11 @@ const TodoPage = () => {
         {showDoneTasks ? 'Show Todos' : 'Show Completed'}
       </button>
 
-      <h3 className='todo-header'>{showDoneTasks ? 'Completed Tasks' : 'Todo Tasks'}</h3>
       {
         message ? <div style={notificationStyle}>{message}</div> : null
       }
+
+      <h3 className='todo-header'>{showDoneTasks ? 'Completed Tasks' : 'Todo Tasks'}</h3>
       <TodoList
         items={handleFilterTasks()}
         onToggleDone={handleToggleDone}
@@ -257,13 +259,13 @@ const TodoPage = () => {
         onDeleteItem={handleDeleteItem}
       />
 
-      <h3>Outstanding Tasks</h3>
+      {/* <h3>Outstanding Tasks</h3>
       <TodoList
         items={outstandingItems}
         onToggleDone={handleToggleDone}
         onEditItem={handleEditItem}
         onDeleteItem={handleDeleteItem}
-      />
+      /> */}
     </div>
   );
 };
