@@ -30,9 +30,47 @@ const TodoPage = () => {
     setItems(todayData)
   }
 
+  const fetchUserPoints = async () => {
+    const token = localStorage.getItem('token')
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `bearer ${token}` }
+    }
+    const response = await axios.get('http://localhost:3000/users/points', config)
+    const data = await response.data
+    setPoints(data)
+  }
+
+  const updateUserPoints = async () => {
+    const token = localStorage.getItem('token')
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `bearer ${token}` }
+    }
+
+    const newPoints = { points: points }
+
+    const response = await axios.post('http://localhost:3000/users/points', newPoints, config)
+  }
+
+
   useEffect(() => {
     fetchTodos()
   }, [])
+
+  useEffect(() => {
+    fetchUserPoints()
+  }, [])
+
+  useEffect(() => {
+    if(points != 0) {
+      updateUserPoints()
+    }
+  }, [points])
+
+
 
   useEffect(() => {
     const filteredOutstandingItems = items.filter(
@@ -52,9 +90,6 @@ const TodoPage = () => {
     // done is being used backwards here because I couldnt fix the previous toggle properly
     // done = false - completed
     // done = true - incomplete
-
-    console.log('clicked')
-    console.log(item)
 
     const updatedItem = { ...item, done: !item.done }
 
