@@ -10,7 +10,7 @@ const api = supertest(app)
 
 describe('api server', () => {
 
-  xtest('user creation succeeds with a fresh username', async () => {
+  test('user creation succeeds with a fresh username', async () => {
     const usersAtStart = await User.find({})
 
     const newUser = {
@@ -73,9 +73,10 @@ describe('api server', () => {
       name: 'test',
       password: 'test'
     }
+    const response1 = await api.post('/users').send(newUser)
 
-    const response = await api.post('/users').send(newUser)
-    expect(response.body.error).toContain('username must be unique')
+    const response2 = await api.post('/users').send(newUser)
+    expect(response2.body.error).toContain('username must be unique')
 
     const usersAtEnd = await User.find({})
     expect(usersAtEnd).toHaveLength(usersAtStart.length)

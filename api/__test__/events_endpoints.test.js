@@ -11,7 +11,7 @@ describe('api server', () => {
   test('responds to get / with status 200', async () => {
     const testData = {
       name: 'Brainiac Brigade',
-      description: 'Organize your tasks'
+      text: 'Organize your tasks'
     }
 
     const response = await api.get('/')

@@ -11,7 +11,7 @@ const PageWrapper = () => {
           <nav>
               <NavLink to="/" id='link' style={styles}>Home</NavLink>
               <NavLink to="login" id='link' style={styles}>Login</NavLink>
-              <NavLink to="calendar" id='link' style={styles}>Calendar</NavLink>
+              <NavLink to="home/calendar" id='link' style={styles}>Calendar</NavLink>
           </nav>
       </header>
       <Outlet/>
