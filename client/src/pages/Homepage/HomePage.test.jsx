@@ -22,37 +22,37 @@ describe("Home Page", () => {
     cleanup();
   });
 
-  it("Displays a heading with appropriate text", () => {
+  it("Displays a heading with text: Welcome to the Homepage!", () => {
     const heading = screen.getByText("Welcome to the Homepage!");
     expect(heading).toBeInTheDocument();
   });
 
-  it("Displays a heading with appropriate text", () => {
+  it("Displays a heading with text: Urgent Tasks", () => {
     const heading = screen.getByText("Urgent Tasks");
     expect(heading).toBeInTheDocument();
   });
 
-  it("Displays a paragraph with appropriate text", () => {
+  it("Displays a paragraph with text: Click here to view urgent tasks.", () => {
     const heading = screen.getByText("Click here to view urgent tasks.");
     expect(heading).toBeInTheDocument();
   });
 
-  it("Displays a heading with appropriate text", () => {
+  it("Displays a heading with text: Calendar", () => {
     const heading = screen.getByText("Calendar");
     expect(heading).toBeInTheDocument();
   });
 
-  it("Displays a paragraph with appropriate text", () => {
+  it("Displays a paragraph with text: Click here to view the calendar.", () => {
     const heading = screen.getByText("Click here to view the calendar.");
     expect(heading).toBeInTheDocument();
   });
 
-  it("Displays a heading with appropriate text", () => {
+  it("Displays a heading with text: Achievements", () => {
     const heading = screen.getByText("Achievements");
     expect(heading).toBeInTheDocument();
   });
 
-  it("Displays a paragraph with appropriate text", () => {
+  it("Displays a paragraph with text: Click here to view your achievements.", () => {
     const heading = screen.getByText("Click here to view your achievements.");
     expect(heading).toBeInTheDocument();
   });
