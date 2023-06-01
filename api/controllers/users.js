@@ -69,6 +69,51 @@ const login = async (req, res) => {
 
 }
 
+const updatePoints = async (req, res) => {
+  const body = req.body
+  let token = ''
+
+  // extracting token from request
+  const authorization = req.get('authorization')
+  if(authorization && authorization.toLowerCase().startsWith('bearer ')) {
+    token = authorization.substring(7)
+  }
+
+  // extracting user from token
+  const decodedToken = jwt.verify(token, process.env.SECRET)
+  if (!decodedToken.id) {
+    return res.status(401).json({ error: 'token missin or invalid' })
+  }
+  // finding user in the DB
+  const user = await User.findById(decodedToken.id)
+
+  const points = body.points
+
+  const updatedUser = await User.findByIdAndUpdate(user.id, { points: points }, { new: true })
+  return res.json(updatedUser)
+}
+
+const getUserPoints = async(req,res) => {
+  const body = req.body
+  let token = ''
+
+  // extracting token from request
+  const authorization = req.get('authorization')
+  if(authorization && authorization.toLowerCase().startsWith('bearer ')) {
+    token = authorization.substring(7)
+  }
+
+  // extracting user from token
+  const decodedToken = jwt.verify(token, process.env.SECRET)
+  if (!decodedToken.id) {
+    return res.status(401).json({ error: 'token missin or invalid' })
+  }
+  // finding user in the DB
+  const user = await User.findById(decodedToken.id)
+  const points = user.points
+  return res.json(points)
+}
+
 module.exports = {
-  index, create, login
+  index, create, login, updatePoints, getUserPoints
 }
