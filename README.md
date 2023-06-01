@@ -83,7 +83,7 @@ You should see something like this in your terminal:
 - HTML
 - CSS
 - React
-- (React calendar library)[https://www.npmjs.com/package/react-calendar]
+- [React calendar library](https://www.npmjs.com/package/react-calendar)
 - JS
 - Node
 - Vite
