@@ -33,4 +33,9 @@ describe("Achievements Page", () => {
     expect(button.textContent).toBe("Toggle") 
   })
 
+  it("Displays a heading with text: Achievements", () => {
+    const heading = screen.getByText("Monday");
+    expect(heading).toBeInTheDocument();
+  });
+
 });
