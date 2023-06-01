@@ -3,8 +3,28 @@ const Event = require('../models/Event')
 const User = require('../models/User')
 
 const index = async(req, res) => {
-  const events = await Event.find({}).populate('user', { username: 1, name: 1 })
-  res.json(events)
+  let token = ''
+
+  // extracting token from request
+  const authorization = req.get('authorization')
+  if(authorization && authorization.toLowerCase().startsWith('bearer ')) {
+    token = authorization.substring(7)
+  }
+
+  // extracting user from token
+  const decodedToken = jwt.verify(token, process.env.SECRET)
+  if (!decodedToken.id) {
+    return res.status(401).json({ error: 'token missin or invalid' })
+  }
+
+  const user = await User.findById(decodedToken.id).populate('events')
+  const userEvents = user.events
+
+  if (userEvents) {
+    res.json(userEvents)
+  } else {
+    res.status(404).end()
+  }
 }
 
 const show = async(req, res) => {
@@ -15,6 +35,25 @@ const show = async(req, res) => {
     res.status(404).end()
   }
 }
+
+// const find = async(req,res) => {
+//   let token = ''
+
+//   // extracting token from request
+//   const authorization = req.get('authorization')
+//   if(authorization && authorization.toLowerCase().startsWith('bearer ')) {
+//     token = authorization.substring(7)
+//   }
+
+//   // extracting user from token
+//   const decodedToken = jwt.verify(token, process.env.SECRET)
+//   if (!decodedToken.id) {
+//     return res.status(401).json({ error: 'token missin or invalid' })
+//   }
+
+//   const user = await User.findById(decodedToken.id).populate('events')
+//   console.log(user)
+// }
 
 const create = async(req, res) => {
   const body = req.body
@@ -48,6 +87,7 @@ const create = async(req, res) => {
   } else {
     const savedEvent = await event.save()
     user.events = user.events.concat(savedEvent._id)
+    await user.save()
 
     res.status(201).json(savedEvent)
   }

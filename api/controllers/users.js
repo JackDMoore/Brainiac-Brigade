@@ -4,7 +4,7 @@ const User = require('../models/User')
 
 
 const index = async (req, res) => {
-  const users = await User.find({})
+  const users = await User.find({}).populate('events')
 
   res.json(users)
 }
