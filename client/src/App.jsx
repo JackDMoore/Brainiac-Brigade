@@ -27,12 +27,10 @@ const App = () => {
         <Route path="/" element={<PageWrapper />}>
           <Route index element={<Pages.LandingPage />} />
           <Route path="home" element={<Pages.HomePage />} />
-          <Route path="calendar" element={<Pages.CalendarPage />} />
+          <Route path="home/calendar" element={<Pages.CalendarPage />} />
           <Route path="todo/:date" element={<Pages.TodoPage />} />
-          <Route
-            path="urgent"
-            element={
-              <Pages.UrgentPage
+          <Route path="home/urgent" element={
+                <Pages.UrgentPage
                 tasks={tasks}
                 onAddTask={handleAddTask}
                 onDeleteTask={handleDeleteTask}
@@ -44,7 +42,7 @@ const App = () => {
           <Route path="login" element={<Pages.LoginPage />} />
           <Route path="register" element={<Pages.RegisterPage />} />
           <Route path="*" element={<Pages.NotFoundPage />} />
-          <Route path="Achievements" element={<Pages.AchievementsPage />} />
+          <Route path="home/Achievements" element={<Pages.AchievementsPage />} />
         </Route>
       </Routes>
     </>
