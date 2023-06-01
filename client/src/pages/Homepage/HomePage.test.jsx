@@ -64,17 +64,4 @@ describe("Home Page", () => {
     expect(window.location.href).toContain("/urgent")
 })
 
-  // it("Displays a calendar", () => {
-  //   // const calendar = container.querySelector("#calendarID")
-  //   // expect(calendar).toBeInTheDocument();
-  //   const calendar = render(<Router><CalendarPage /></Router>)
-  //   expect(calendar).toBeTruthy()
-  // });
-
-  // it("Clicking on calendar routes you to TodoPage", async () => {
-  //   expect("window.location.href").not.toContain("/todo");
-  //   const todo = screen.getByText("TodoPage");
-  //   await userEvent.click(todo);
-  //   expect(window.location.href).toContain("/todo");
-  // });
 });
