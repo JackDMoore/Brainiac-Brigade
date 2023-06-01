@@ -2,13 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
-const TodoPage = ({ tasks, onAddTask }) => {
+const TodoPage = () => {
   // getting the date from params
   const { date } = useParams()
   // converting data string to date format
   let showDate = new Date(date)
 
   const [items, setItems] = useState([]);
+  const [message, setMessage] = useState('')
   // setting initial date to be the one coming from params
   const [currentDate, setCurrentDate] = useState(showDate);
   const [points, setPoints] = useState(0);
@@ -48,11 +49,15 @@ const TodoPage = ({ tasks, onAddTask }) => {
 
 
   const handleToggleDone = async (item) => {
+    // done is being used backwards here because I couldnt fix the previous toggle properly
+    // done = false - completed
+    // done = true - incomplete
 
     console.log('clicked')
     console.log(item)
 
     const updatedItem = { ...item, done: !item.done }
+
 
     const token = localStorage.getItem('token')
     const config = {
@@ -61,42 +66,25 @@ const TodoPage = ({ tasks, onAddTask }) => {
         Authorization: `bearer ${token}` }
     }
 
-    const response = await axios.patch(`http://localhost:3000/events/${item}`, updatedItem, config)
+    const response = await axios.patch(`http://localhost:3000/events/${item._id}`, updatedItem, config)
+
+    if (item.done === false) {
+      setPoints((prevPoints) => prevPoints + 100)
+      setMessage(`todo: ${item.text} was marked as completed`)
+      setTimeout(() => {
+        setMessage(null)
+      }, 5000);
+    }
+
+    if (item.done === true) {
+      setPoints((prevPoints) => prevPoints - 100)
+      setMessage(`todo: ${item.text} was marked as incomplete`)
+      setTimeout(() => {
+        setMessage(null)
+      }, 5000);
+    }
+
     fetchTodos()
-
-    // TODO - old code
-    // const updatedItems = items.map((item) => {
-    //   if (item.id === id) {
-    //     let pointsToAdd = 0;
-
-    //     if (item.done) {
-
-    //       if (item.finish && new Date(item.finish) < currentDate) {
-
-    //         pointsToAdd = 50;
-    //       }
-    //     } else {
-
-    //       if (item.finish && new Date(item.finish) < currentDate) {
-
-    //         pointsToAdd = 50;
-    //       } else {
-
-    //         pointsToAdd = 100;
-    //       }
-
-    //       setPoints((prevPoints) => prevPoints - 100);
-
-    //     }
-
-    //     const updatedItem = { ...item, done: !item.done };
-    //     setPoints((prevPoints) => prevPoints + pointsToAdd);
-    //     return updatedItem;
-    //   }
-    //   return item;
-    // });
-
-    // setItems(updatedItems);
   };
 
 
@@ -116,8 +104,6 @@ const TodoPage = ({ tasks, onAddTask }) => {
 
         const response = await axios.patch(`http://localhost:3000/events/${item._id}`, updatedItem, config)
         fetchTodos()
-
-
   };
 
 
@@ -142,8 +128,6 @@ const TodoPage = ({ tasks, onAddTask }) => {
   };
 
 
-
-
   const handleDeleteItem = async (item, done) => {
     if (done) {
       setPoints((prevPoints) => prevPoints - 100);
@@ -158,6 +142,11 @@ const TodoPage = ({ tasks, onAddTask }) => {
     }
 
     const response = await axios.delete(`http://localhost:3000/events/${item._id}`, config)
+
+    setMessage(`todo: ${item.text} was deleted`)
+    setTimeout(() => {
+      setMessage(null)
+    }, 5000);
 
     fetchTodos()
   };
@@ -192,6 +181,16 @@ const TodoPage = ({ tasks, onAddTask }) => {
     fetchTodos()
   };
 
+  const notificationStyle = {
+    color: 'green',
+    background: 'lightgrey',
+    fontSize: 20,
+    borderStyle: 'solid',
+    borderRadius: 5,
+    padding: 10,
+    marginBottom: 10,
+  }
+
 
   return (
     <div>
@@ -204,7 +203,11 @@ const TodoPage = ({ tasks, onAddTask }) => {
         <button onClick={handleNextDay}>Tomorrow &#8594;</button>
       </div>
 
-      <TodoForm onAddItem={handleAddItem} setItems={setItems} currentDate={currentDate} fetchTodos={fetchTodos}/>
+      {
+        message ? <div style={notificationStyle}>{message}</div> : null
+      }
+
+      <TodoForm onAddItem={handleAddItem} setItems={setItems} currentDate={currentDate} fetchTodos={fetchTodos} setMessage={setMessage}/>
 
       <button onClick={handleToggleShowDone}>
         {showDoneTasks ? 'Show Todos' : 'Show Completed'}
@@ -229,7 +232,7 @@ const TodoPage = ({ tasks, onAddTask }) => {
   );
 };
 
-const TodoForm = ({ setItems, onAddItem, currentDate, fetchTodos}) => {
+const TodoForm = ({ setItems, onAddItem, currentDate, fetchTodos, setMessage}) => {
   const [text, setText] = useState('');
   // const [hours, setHours] = useState('');
   // const [days, setDays] = useState('');
@@ -257,13 +260,18 @@ const TodoForm = ({ setItems, onAddItem, currentDate, fetchTodos}) => {
     const response = await axios.post('http://localhost:3000/events', newItem, config)
     const createdItem = response.data
 
+    setMessage(`a new todo: ${createdItem.text} was added`)
+    setTimeout(() => {
+      setMessage(null)
+    }, 5000);
+
     fetchTodos()
 
 
 
     if (text.trim()) {
       const dueDate = new Date();
-      onAddItem(updatedData, updatedData.text, dueDate);
+      onAddItem(dueDate);
       setText('');
       // setHours('');
       // setDays('');
@@ -313,7 +321,7 @@ const TodoList = ({ items, onToggleDone, onEditItem, onDeleteItem }) => {
 
 const TodoItem = ({ item, onToggleDone, onEditItem, onDeleteItem }) => {
   const handleToggle = () => {
-    onToggleDone(item._id);
+    onToggleDone(item);
   };
 
   const handleEdit = (e) => {
@@ -378,7 +386,7 @@ const TodoItem = ({ item, onToggleDone, onEditItem, onDeleteItem }) => {
       <div>
         <input type="checkbox" checked={item.done} onChange={handleToggle} />
         <span className={item.done ? 'done' : ''}>{item.text}</span>
-        <span className={taskColor}>{daysRemaining} days left</span>
+        {/* <span className={taskColor}>{daysRemaining} days left</span> */}
         <button onClick={handleEdit}>Edit</button>
         <button onClick={handleDelete}>Delete</button>
       </div>
