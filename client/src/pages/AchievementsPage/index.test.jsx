@@ -33,8 +33,8 @@ describe("Achievements Page", () => {
     expect(button.textContent).toBe("Toggle") 
   })
 
-  it("Displays a heading with text: Achievements", () => {
-    const heading = screen.getByText("Monday");
+  it("Displays a table of achievements", () => {
+    const heading = screen.getByRole("table");
     expect(heading).toBeInTheDocument();
   });
 
