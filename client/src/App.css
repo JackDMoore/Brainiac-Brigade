@@ -11,9 +11,10 @@
   will-change: filter;
   transition: filter 300ms;
 }
+
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
-}
+} 
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
@@ -40,3 +41,40 @@
 .read-the-docs {
   color: #888;
 }
+
+.react-calendar__month-view__days__day--neighboringMonth {
+  color: #757575;
+}
+
+.react-calendar__year-view .react-calendar__tile,
+.react-calendar__decade-view .react-calendar__tile,
+.react-calendar__century-view .react-calendar__tile {
+  padding: 2em 0.5em;
+}
+
+/* .react-calendar button {
+  margin: 10px;
+  border: 0;
+  outline: none;
+} */
+
+.react-calendar__navigation {
+  margin-bottom: 1em;
+}
+
+.react-calendar__month-view__weekdays {
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 0.75em;
+  color: #FF8E3C;
+}
+
+/* .react-calendar__month-view__weekdays__weekday {
+  padding: 0.5em;
+} */
+
+
+
+
+
