@@ -1,8 +1,8 @@
 import React from "react";
 
-import CalendarPage from "../CalendarPage";
+import HomePage from "../HomePage";
 
-import userEvent from "@testing-library/user-event";
+// import userEvent from "@testing-library/user-event";
 import { MemoryRouter as Router } from "react-router-dom";
 import { describe, it, expect, beforeEach, afterEach } from "vitest";
 import { screen, render, cleanup } from "@testing-library/react";
@@ -13,7 +13,7 @@ describe("Calendar Page", () => {
   beforeEach(() => {
     render(
       <Router>
-        <CalendarPage />
+        <HomePage />
       </Router>
     );
   });
@@ -23,17 +23,16 @@ describe("Calendar Page", () => {
   });
 
   it("Displays a heading with appropriate text", () => {
-    const heading = screen.getByRole("heading");
+    const heading = screen.getByText("Welcome to the Homepage!");
     expect(heading).toBeInTheDocument();
-    expect(heading.textContent).toBe("Calendar");
   });
 
-  it("Displays a calendar", () => {
-    // const calendar = container.querySelector("#calendarID")
-    // expect(calendar).toBeInTheDocument();
-    const calendar = render(<Router><CalendarPage /></Router>)
-    expect(calendar).toBeTruthy()
-  });
+  // it("Displays a calendar", () => {
+  //   // const calendar = container.querySelector("#calendarID")
+  //   // expect(calendar).toBeInTheDocument();
+  //   const calendar = render(<Router><CalendarPage /></Router>)
+  //   expect(calendar).toBeTruthy()
+  // });
 
   // it("Clicking on calendar routes you to TodoPage", async () => {
   //   expect("window.location.href").not.toContain("/todo");
