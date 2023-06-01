@@ -32,6 +32,17 @@ describe("Calendar Page", () => {
     expect(heading).toBeInTheDocument();
   });
 
+  it("Displays a paragraph with appropriate text", () => {
+    const heading = screen.getByText("Click here to view urgent tasks.");
+    expect(heading).toBeInTheDocument();
+  });
+
+  it("Displays a heading with appropriate text", () => {
+    const heading = screen.getByText("Calendar");
+    expect(heading).toBeInTheDocument();
+  });
+
+
   // it("Displays a calendar", () => {
   //   // const calendar = container.querySelector("#calendarID")
   //   // expect(calendar).toBeInTheDocument();
