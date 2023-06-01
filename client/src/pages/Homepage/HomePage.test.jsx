@@ -42,6 +42,15 @@ describe("Home Page", () => {
     expect(heading).toBeInTheDocument();
   });
 
+  it("Displays a paragraph with appropriate text", () => {
+    const heading = screen.getByText("Click here to view the calendar.");
+    expect(heading).toBeInTheDocument();
+  });
+
+  it("Displays a heading with appropriate text", () => {
+    const heading = screen.getByText("Achievements");
+    expect(heading).toBeInTheDocument();
+  });
 
   // it("Displays a calendar", () => {
   //   // const calendar = container.querySelector("#calendarID")
