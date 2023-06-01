@@ -8,6 +8,7 @@ const RegisterPage = () => {
         <>
             <h1>Register Page</h1>
             <Register/>
+            <p>Already registered? <a href='/login'>Login here</a></p>
         </>
       )
 }
