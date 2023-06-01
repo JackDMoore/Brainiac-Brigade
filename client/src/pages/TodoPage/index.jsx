@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import './todo.css'
 
 const TodoPage = () => {
   // getting the date from params
@@ -233,22 +234,22 @@ const TodoPage = () => {
       {/* <h2>{showDate.toDateString()}</h2> */}
       <p>Points: {points}</p>
 
-      <div>
+      <div className='y-t-buttons'>
         <button onClick={handlePreviousDay}>&#8592; Yesterday</button>
         <button onClick={handleNextDay}>Tomorrow &#8594;</button>
       </div>
 
-      {
-        message ? <div style={notificationStyle}>{message}</div> : null
-      }
 
       <TodoForm onAddItem={handleAddItem} setItems={setItems} currentDate={currentDate} fetchTodos={fetchTodos} setMessage={setMessage}/>
 
-      <button onClick={handleToggleShowDone}>
+      <button className='show-button' onClick={handleToggleShowDone}>
         {showDoneTasks ? 'Show Todos' : 'Show Completed'}
       </button>
 
-      <h3>{showDoneTasks ? 'Completed Tasks' : 'Todo Tasks'}</h3>
+      <h3 className='todo-header'>{showDoneTasks ? 'Completed Tasks' : 'Todo Tasks'}</h3>
+      {
+        message ? <div style={notificationStyle}>{message}</div> : null
+      }
       <TodoList
         items={handleFilterTasks()}
         onToggleDone={handleToggleDone}
@@ -314,33 +315,35 @@ const TodoForm = ({ setItems, onAddItem, currentDate, fetchTodos, setMessage}) =
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        type="text"
-        value={text}
-        onChange={(e) => setText(e.target.value)}
-        placeholder="Add a new task"
-      />
-      {/* <input
-        type="number"
-        value={hours}
-        onChange={(e) => setHours(e.target.value)}
-        placeholder="Hours to complete"
-      />
-      <input
-        type="number"
-        value={days}
-        onChange={(e) => setDays(e.target.value)}
-        placeholder="Days to complete"
-      /> */}
-      <button type="submit">Add</button>
-    </form>
+    <div className="form-container">
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+          placeholder="Add a new task"
+        />
+        {/* <input
+          type="number"
+          value={hours}
+          onChange={(e) => setHours(e.target.value)}
+          placeholder="Hours to complete"
+        />
+        <input
+          type="number"
+          value={days}
+          onChange={(e) => setDays(e.target.value)}
+          placeholder="Days to complete"
+        /> */}
+        <button id="add-button" type="submit">+</button>
+      </form>
+    </div>
   );
 };
 
 const TodoList = ({ items, onToggleDone, onEditItem, onDeleteItem }) => {
   return (
-    <ul>
+    <ul className='todo-list'>
       {items.map((item) => (
         <TodoItem
           key={item._id}
@@ -418,12 +421,16 @@ const TodoItem = ({ item, onToggleDone, onEditItem, onDeleteItem }) => {
 
   return (
     <li>
-      <div>
-        <input type="checkbox" checked={item.done} onChange={handleToggle} />
-        <span className={item.done ? 'done' : ''}>{item.text}</span>
-        {/* <span className={taskColor}>{daysRemaining} days left</span> */}
-        <button onClick={handleEdit}>Edit</button>
-        <button onClick={handleDelete}>Delete</button>
+      <div className='todos-container'>
+        <div>
+          <input type="checkbox" checked={item.done} onChange={handleToggle} />
+          <span id="todos-items" className={item.done ? 'done' : ''}>{item.text}</span>
+          {/* <span className={taskColor}>{daysRemaining} days left</span> */}
+        </div>
+        <div>
+          <button className="edit-button"onClick={handleEdit}>Edit</button>
+          <button className="delete-button"onClick={handleDelete}>Remove</button>
+        </div>
       </div>
     </li>
   );

@@ -1,0 +1,114 @@
+#add-button {
+  height: 60px;
+  width: 60px;
+  border-radius: 25px;
+  outline: none;
+  border:none;
+  background-color: #1a1a1a;
+  color: #FF8E3C;
+  font-size: 1rem;
+  margin: 0.25rem;
+  cursor: pointer;
+  text-align: center;
+  border: 1px solid transparent;
+}
+
+
+#add-button:hover {
+  border-color: #FF8E3C;
+}
+/* #add-button:focus,
+#add-button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+} */
+
+.form-container {
+  margin: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.form-container input {
+  padding: 0.5rem 1rem;
+  height: 50px;
+  outline: none;
+  border: none;
+  background-color: white;
+  width: 500px;
+  font-size: 1.15rem;
+  margin: 0.25rem;
+  border-radius: 25px;
+}
+
+.edit-button,
+.delete-button {
+  border-radius: 8px;
+  padding: 0.3em 0.8em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #242424;
+  cursor: pointer;
+  color: #FF8E3C;
+  margin: 5px;
+  border: none;
+}
+
+.edit-button:hover,
+.delete-button:hover {
+  font-weight: bolder;
+}
+
+
+#todos-items {
+  padding: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.todo-list {
+  list-style-type: none;
+}
+
+.todo-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.todo-list li {
+  width: 600px;
+  padding: 0.5rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 4px solid black;
+  color: white;
+  font-size: 1.2rem;
+}
+
+.todos-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.todo-header {
+  font-size: 2.5rem;
+}
+
+.show-button {
+  color: #FF8E3C;
+}
+
+.show-button:hover {
+  border-color: #FF8E3C;
+}
+
+.y-t-buttons:hover {
+  border-color: #FF8E3C;
+}
+
+.y-t-buttons > button {
+  margin: 10px;
+  color: #FF8E3C;
+}
