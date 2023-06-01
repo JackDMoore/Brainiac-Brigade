@@ -2,6 +2,10 @@
     margin: 15px;
 }
 
-a{
-    color: #ffa600c5
+#inputField{
+    padding: 5px;
+}
+
+p {
+    margin-bottom: 8px;
 }
