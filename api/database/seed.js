@@ -29,7 +29,7 @@ async function seedDB() {
     console.log(getUser._id)
 
     let newEvent = new Event ({
-      description: 'Finish final presentation',
+      text: 'Finish final presentation',
       start: faker.date.recent(),
       end: faker.date.soon(),
       user: getUser._id

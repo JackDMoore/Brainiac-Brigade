@@ -1,8 +1,8 @@
 const mongoose = require('mongoose')
 
 const eventSchema = new mongoose.Schema({
-  description: { type: String, required: true},
-  complete: {type: String, default: ''},
+  text: { type: String, required: true},
+  done: {type: String, default: ''},
   start : {
     type: Date,
     // required: [true, 'Please insert the start of your event']

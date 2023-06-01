@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
 
@@ -6,6 +6,21 @@ import * as Pages from "./pages";
 import { PageWrapper } from "./components";
 
 const App = () => {
+  const [tasks, setTasks] = useState([]);
+
+  const handleAddTask = (task, date) => {
+    const newTask = { task, date };
+    setTasks([...tasks, newTask]);
+  };
+
+  const handleDeleteTask = (updatedTasks) => {
+    setTasks(updatedTasks);
+  };
+
+  const handleUpdateTask = (updatedTasks) => {
+    setTasks(updatedTasks);
+  };
+
   return (
     <>
       <Routes>
@@ -14,6 +29,18 @@ const App = () => {
           <Route path="home" element={<Pages.HomePage />} />
           <Route path="calendar" element={<Pages.CalendarPage />} />
           <Route path="todo/:date" element={<Pages.TodoPage />} />
+          <Route
+            path="urgent"
+            element={
+              <Pages.UrgentPage
+                tasks={tasks}
+                onAddTask={handleAddTask}
+                onDeleteTask={handleDeleteTask}
+                onUpdateTask={handleUpdateTask}
+              />
+            }
+          />
+
           <Route path="login" element={<Pages.LoginPage />} />
           <Route path="register" element={<Pages.RegisterPage />} />
           <Route path="*" element={<Pages.NotFoundPage />} />
