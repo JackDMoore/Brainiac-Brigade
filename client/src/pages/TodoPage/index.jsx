@@ -15,18 +15,21 @@ const TodoPage = ({ tasks, onAddTask }) => {
   const [showDoneTasks, setShowDoneTasks] = useState(true);
   const [outstandingItems, setOutstandingItems] = useState([]);
 
-  useEffect(() => {
+  const fetchTodos = async () => {
     const token = localStorage.getItem('token')
     const config = {
       headers: {
         'Content-Type': 'application/json',
         Authorization: `bearer ${token}` }
     }
-    const fetchTodos = async () => {
-      const response = await axios.get('http://localhost:3000/events', config)
-      const data = await response.data
-      setItems(data)
-    }
+    const response = await axios.get('http://localhost:3000/events', config)
+    const data = await response.data
+    const todayData = data.filter(d => d.end === currentDate.toISOString())
+
+    setItems(todayData)
+  }
+
+  useEffect(() => {
     fetchTodos()
   }, [])
 
@@ -95,29 +98,9 @@ const TodoPage = ({ tasks, onAddTask }) => {
         }
 
         const response = await axios.patch(`http://localhost:3000/events/${item._id}`, updatedItem, config)
-
-        const updatedData = await axios.get('http://localhost:3000/events', config)
-        const freshData = await updatedData.data
-        setItems(freshData)
+        fetchTodos()
 
 
-    // const updatedItems = items.map((item) => {
-    //   if (item.id === id) {
-    //     let finish = null;
-
-    //     if (newHours && newHours !== '') {
-    //       const finishDate = new Date();
-    //       finishDate.setHours(finishDate.getHours() + parseInt(newHours));
-    //       finish = finishDate.toISOString();
-    //     } else if (newDays && newDays !== '') {
-    //       const finishDate = new Date();
-    //       finishDate.setDate(finishDate.getDate() + parseInt(newDays));
-    //       finish = finishDate.toISOString();
-    //     }
-
-    //     return { ...item, text: newText, hours: newHours, days: newDays, finish };
-    //   }
-    //   return item;
     };
 
 
@@ -125,18 +108,6 @@ const TodoPage = ({ tasks, onAddTask }) => {
     const handleToggle = () => {
       onToggleDone(item._id);
     };
-
-    // const handleEdit = () => {
-    //   const newText = prompt('Enter new text:', item.text);
-    //   if (newText !== null) {
-    //     const newTime = prompt('Enter new time (hours:days):', `${item.hours || ''}:${item.days || ''}`);
-    //     if (newTime !== null) {
-    //       const [newHours, newDays] = newTime.split(':');
-    //       onEditItem(item.id, newText.trim(), newHours.trim(), newDays.trim());
-    //     }
-    //   }
-    // };
-
 
 
     const handleDelete = () => {
@@ -171,15 +142,7 @@ const TodoPage = ({ tasks, onAddTask }) => {
 
     const response = await axios.delete(`http://localhost:3000/events/${item._id}`, config)
 
-    const updatedData = await axios.get('http://localhost:3000/events', config)
-    const freshData = await updatedData.data
-    setItems(freshData)
-
-
-
-    // // old
-    // const updatedItems = items.filter((item) => item.id !== id);
-    // setItems(updatedItems);
+    fetchTodos()
   };
 
   const handleFilterTasks = () => {
@@ -195,36 +158,21 @@ const TodoPage = ({ tasks, onAddTask }) => {
   };
 
   const handlePreviousDay = () => {
-    setCurrentDate((prevDate) => {
-      const newDate = new Date(prevDate);
-      newDate.setDate(newDate.getDate() - 1);
-      return newDate;
-    });
+    let dateToChange = currentDate
+    let nextDate = dateToChange.setDate(dateToChange.getDate() - 1)
+
+    const dateFormatted = new Date(nextDate)
+    setCurrentDate(dateFormatted)
+    fetchTodos()
   };
 
   const handleNextDay = () => {
-    setCurrentDate((prevDate) => {
-      const newDate = new Date(prevDate);
-      newDate.setDate(newDate.getDate() + 1);
+    let dateToChange = currentDate
+    let nextDate = dateToChange.setDate(dateToChange.getDate() + 1)
 
-      const updatedItems = items.map((item) => {
-        if (!item.done) {
-          const finishDate = new Date(item.start);
-          const hoursToFinish = parseInt(item.hours);
-          const daysToFinish = parseInt(item.days);
-          finishDate.setHours(finishDate.getHours() + hoursToFinish);
-          finishDate.setDate(finishDate.getDate() + daysToFinish);
-
-          if (finishDate < newDate) {
-            return { ...item, start: null, finish: null };
-          }
-        }
-        return item;
-      });
-
-      setItems(updatedItems);
-      return newDate;
-    });
+    const dateFormatted = new Date(nextDate)
+    setCurrentDate(dateFormatted)
+    fetchTodos()
   };
 
 
@@ -239,7 +187,7 @@ const TodoPage = ({ tasks, onAddTask }) => {
         <button onClick={handleNextDay}>Tomorrow &#8594;</button>
       </div>
 
-      <TodoForm onAddItem={handleAddItem} setItems={setItems} />
+      <TodoForm onAddItem={handleAddItem} setItems={setItems} currentDate={currentDate} fetchTodos={fetchTodos}/>
 
       <button onClick={handleToggleShowDone}>
         {showDoneTasks ? 'Show Todos' : 'Show Done'}
@@ -264,10 +212,10 @@ const TodoPage = ({ tasks, onAddTask }) => {
   );
 };
 
-const TodoForm = ({ setItems, onAddItem }) => {
+const TodoForm = ({ setItems, onAddItem, currentDate, fetchTodos}) => {
   const [text, setText] = useState('');
-  const [hours, setHours] = useState('');
-  const [days, setDays] = useState('');
+  // const [hours, setHours] = useState('');
+  // const [days, setDays] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -275,11 +223,13 @@ const TodoForm = ({ setItems, onAddItem }) => {
     // TODO
 
     const newItem = {
-      text: text
+      text: text,
+      end: currentDate
       // start: null,
       // days: null,
       // done: false,
     };
+    console.log(newItem, 'l279')
     const token = localStorage.getItem('token')
     const config = {
       headers: {
@@ -290,18 +240,16 @@ const TodoForm = ({ setItems, onAddItem }) => {
     const response = await axios.post('http://localhost:3000/events', newItem, config)
     const createdItem = response.data
 
-    const updatedData = await axios.get('http://localhost:3000/events', config)
-    const freshData = await updatedData.data
-    setItems(freshData)
+    fetchTodos()
 
 
 
     if (text.trim()) {
       const dueDate = new Date();
-      onAddItem(updatedData, updatedData.text.trim(), dueDate);
+      onAddItem(updatedData, updatedData.text, dueDate);
       setText('');
-      setHours('');
-      setDays('');
+      // setHours('');
+      // setDays('');
     }
   };
 
@@ -313,7 +261,7 @@ const TodoForm = ({ setItems, onAddItem }) => {
         onChange={(e) => setText(e.target.value)}
         placeholder="Add a new task"
       />
-      <input
+      {/* <input
         type="number"
         value={hours}
         onChange={(e) => setHours(e.target.value)}
@@ -324,7 +272,7 @@ const TodoForm = ({ setItems, onAddItem }) => {
         value={days}
         onChange={(e) => setDays(e.target.value)}
         placeholder="Days to complete"
-      />
+      /> */}
       <button type="submit">Add</button>
     </form>
   );
@@ -354,7 +302,6 @@ const TodoItem = ({ item, onToggleDone, onEditItem, onDeleteItem }) => {
   const handleEdit = (e) => {
     e.preventDefault()
     const newText = prompt('Enter new text:', item.text);
-    console.log(item, 'edit l357')
     if (newText) {
       onEditItem(item, newText.trim(), item.hours, item.days);
     }
