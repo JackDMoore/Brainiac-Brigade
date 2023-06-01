@@ -12,7 +12,7 @@ const TodoPage = ({ tasks, onAddTask }) => {
   // setting initial date to be the one coming from params
   const [currentDate, setCurrentDate] = useState(showDate);
   const [points, setPoints] = useState(0);
-  const [showDoneTasks, setShowDoneTasks] = useState(true);
+  const [showDoneTasks, setShowDoneTasks] = useState(false);
   const [outstandingItems, setOutstandingItems] = useState([]);
 
   const fetchTodos = async () => {
@@ -47,39 +47,56 @@ const TodoPage = ({ tasks, onAddTask }) => {
 };
 
 
-  const handleToggleDone = (id) => {
-    const updatedItems = items.map((item) => {
-      if (item.id === id) {
-        let pointsToAdd = 0;
+  const handleToggleDone = async (item) => {
 
-        if (item.done) {
+    console.log('clicked')
+    console.log(item)
 
-          if (item.finish && new Date(item.finish) < currentDate) {
+    const updatedItem = { ...item, done: !item.done }
 
-            pointsToAdd = 50;
-          }
-        } else {
+    const token = localStorage.getItem('token')
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `bearer ${token}` }
+    }
 
-          if (item.finish && new Date(item.finish) < currentDate) {
+    const response = await axios.patch(`http://localhost:3000/events/${item}`, updatedItem, config)
+    fetchTodos()
 
-            pointsToAdd = 50;
-          } else {
+    // TODO - old code
+    // const updatedItems = items.map((item) => {
+    //   if (item.id === id) {
+    //     let pointsToAdd = 0;
 
-            pointsToAdd = 100;
-          }
+    //     if (item.done) {
 
-          setPoints((prevPoints) => prevPoints - 100);
+    //       if (item.finish && new Date(item.finish) < currentDate) {
 
-        }
+    //         pointsToAdd = 50;
+    //       }
+    //     } else {
 
-        const updatedItem = { ...item, done: !item.done };
-        setPoints((prevPoints) => prevPoints + pointsToAdd);
-        return updatedItem;
-      }
-      return item;
-    });
+    //       if (item.finish && new Date(item.finish) < currentDate) {
 
-    setItems(updatedItems);
+    //         pointsToAdd = 50;
+    //       } else {
+
+    //         pointsToAdd = 100;
+    //       }
+
+    //       setPoints((prevPoints) => prevPoints - 100);
+
+    //     }
+
+    //     const updatedItem = { ...item, done: !item.done };
+    //     setPoints((prevPoints) => prevPoints + pointsToAdd);
+    //     return updatedItem;
+    //   }
+    //   return item;
+    // });
+
+    // setItems(updatedItems);
   };
 
 
@@ -101,12 +118,12 @@ const TodoPage = ({ tasks, onAddTask }) => {
         fetchTodos()
 
 
-    };
+  };
 
 
   const TodoItem = ({ item, onToggleDone, onEditItem, onDeleteItem }) => {
     const handleToggle = () => {
-      onToggleDone(item._id);
+      onToggleDone(item);
     };
 
 
@@ -116,7 +133,7 @@ const TodoPage = ({ tasks, onAddTask }) => {
 
     return (
       <li>
-        <input type="checkbox" checked={item.done} onChange={handleToggle} />
+        <input type="checkbox" checked={item.done} onClick={handleToggle} />
         <span className={item.done ? 'done' : ''}>{item.text}</span>
         <button onClick={handleEdit}>Edit</button>
         <button onClick={handleDelete}>Delete</button>
@@ -190,10 +207,10 @@ const TodoPage = ({ tasks, onAddTask }) => {
       <TodoForm onAddItem={handleAddItem} setItems={setItems} currentDate={currentDate} fetchTodos={fetchTodos}/>
 
       <button onClick={handleToggleShowDone}>
-        {showDoneTasks ? 'Show Todos' : 'Show Done'}
+        {showDoneTasks ? 'Show Todos' : 'Show Completed'}
       </button>
 
-      <h3>{showDoneTasks ? 'Done Tasks' : 'Todo Tasks'}</h3>
+      <h3>{showDoneTasks ? 'Completed Tasks' : 'Todo Tasks'}</h3>
       <TodoList
         items={handleFilterTasks()}
         onToggleDone={handleToggleDone}
