@@ -20,10 +20,11 @@ const Login = (props) => {
     e.preventDefault()
     try {
     const options = {"username":username, "password":password}
-    const response = await axios.post("http://localhost:3000/users/login", options)
+    const response = await axios.post("https://brainiac-api.onrender.com/users/login", options)
     console.log(response) 
     if (response.status == 200) {
       localStorage.setItem("token",response.data.token)
+      window.location.assign("/home")
     } 
     } catch (error) {
         alert(error.response.data.error)

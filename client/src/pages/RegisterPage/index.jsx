@@ -5,10 +5,9 @@ import { Register } from '../../components'
 const RegisterPage = () => {
 
       return (
-        <>
-            <h1>Register Page</h1>
+        <div className='input-container'>
             <Register/>
-        </>
+        </div>
       )
 }
 export default RegisterPage

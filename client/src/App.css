@@ -4,7 +4,6 @@
   padding: 2rem;
   text-align: center;
 }
-
 .logo {
   height: 6em;
   padding: 1.5em;
@@ -42,7 +41,7 @@
 }
 
 /* .home {
-
+  display: inline-flex;
 } */
 
 .box1 {
@@ -111,7 +110,7 @@ p {
   margin-bottom: 10px;
 }
 
-button {
+/* button {
   margin-right: 10px;
   padding: 10px 20px;
   border: none;
@@ -119,30 +118,30 @@ button {
   color: white;
   font-size: 16px;
   cursor: pointer;
-}
+} */
 
-button:hover {
+/* button:hover {
   background-color: #2980b9;
-}
+} */
 
-input[type="text"],
+/* input[type="text"],
 input[type="number"] {
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 16px;
-}
+} */
 
-input[type="submit"] {
+/* input[type="submit"] {
   padding: 10px 20px;
   border: none;
   background-color: #3498db;
   color: white;
   font-size: 16px;
   cursor: pointer;
-}
+} */
 
-input[type="submit"]:hover {
+/* input[type="submit"]:hover {
   background-color: #2980b9;
-}
+} */
 
