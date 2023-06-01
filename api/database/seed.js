@@ -20,7 +20,8 @@ async function seedDB() {
     let newUser = new User ({
       username: username,
       name: name,
-      events: []
+      events: [],
+      points: 800
     })
     let savedUser = await newUser.save()
     console.log('user saved')
