@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
 import axios from 'axios'
+import "../Register/index.css"
 
 const Register = () => {
     const [username, setUsername] = useState("")
@@ -44,7 +45,7 @@ const Register = () => {
           <input type='text' aria-label='username input' placeholder='Enter Username' onChange={handleUsername} value={username}></input>
           <p>Password: </p>
           <input type='password' aria-label='password input' placeholder='Enter Password' onChange={handlePassword} value={password}></input><br/>
-          <input type='submit' onClick={gatherDetails}></input>
+          <input type='submit' onClick={gatherDetails} id='submitBtn'></input>
       </form>
       </>
     )
