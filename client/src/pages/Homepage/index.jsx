@@ -39,26 +39,28 @@ const HomePage = () => {
     <div className='home'>
     <div>
       <h2>Welcome to the Homepage!</h2>
-      <div className="box1">
-        <Link to="calendar">
-          <h3>Calendar</h3>
-        </Link>
-        <p>Click here to view the calendar.</p>
-      </div>
-
-      <div className="box2">
-        <Link to="urgent">
-          <h3>Urgent Tasks</h3>
-        </Link>
-        <p>Click here to view urgent tasks.</p>
-      </div>
       
-      <div className="box3">
-        <Link to="achievements">
-          <h3>Achievements</h3>
+      <Link to="calendar">
+  <div className="box1">
+    <h3>Calendar</h3>
+  </div>
+</Link>
+
+      
+        <Link to="urgent">
+        <div className="box2">
+          <h3>Urgent Tasks</h3>
+          </div>
         </Link>
-        <p>Click here to view your achievements.</p>
-      </div>
+       
+     
+        <Link to="achievements">
+      <div className="box3">
+        <h3>Achievements</h3>
+        </div>
+        </Link>
+      
+      
     </div>
     </div>
   );
