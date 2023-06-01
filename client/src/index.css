@@ -72,9 +72,8 @@ nav {
   border: solid 1px;
   padding: 5%;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  margin-bottom: 7%;
 
   height: 110px;
   padding: 0 20px;
