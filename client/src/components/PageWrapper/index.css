@@ -1,5 +1,10 @@
 #link{
-    padding: 7px;
+    padding: 15px;
     font-size: x-large;
-    color: #ffa600c5;
+    color: #FF8E3C;
 }
+#logo{
+    max-width: 70px;
+    max-height: auto;
+    
+  }

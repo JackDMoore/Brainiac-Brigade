@@ -1,9 +1,11 @@
 #submitBtn{
     margin: 15px;
+    
 }
 
 #inputField{
     padding: 5px;
+    margin-bottom: 10px;
 }
 
 p {

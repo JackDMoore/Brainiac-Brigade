@@ -8,7 +8,7 @@ const RegisterPage = () => {
         <>
             <h1>Register Page</h1>
             <Register/>
-            <p>Already registered? <a href='/login'  style={{color: "#ffa600c5"}}>Login here</a></p>
+            <p>Already registered? <a href='/login'  style={{color: "#FF8E3C"}}>Login here</a></p>
         </>
       )
 }
