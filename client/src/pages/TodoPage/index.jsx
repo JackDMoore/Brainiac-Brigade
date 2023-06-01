@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import axios from 'axios';
 
 const TodoPage = ({ tasks, onAddTask }) => {
   // getting the date from params
@@ -15,14 +16,29 @@ const TodoPage = ({ tasks, onAddTask }) => {
   const [outstandingItems, setOutstandingItems] = useState([]);
 
   useEffect(() => {
+    const token = localStorage.getItem('token')
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `bearer ${token}` }
+    }
+    const fetchTodos = async () => {
+      const response = await axios.get('http://localhost:3000/events', config)
+      const data = await response.data
+      setItems(data)
+    }
+    fetchTodos()
+  }, [])
+
+  useEffect(() => {
     const filteredOutstandingItems = items.filter(
       (item) => !item.done && item.finish !== null && new Date(item.finish) < currentDate
     );
     setOutstandingItems(filteredOutstandingItems);
   }, [items, currentDate]);
 
-  const handleAddItem = (text) => {
-  const newItem = { id: Date.now(), text, done: false, dueDate: currentDate.toISOString() };
+  const handleAddItem = (item, text) => {
+  const newItem = { id: item._id, text, done: false, dueDate: currentDate.toISOString() };
   setItems([...items, newItem]);
   onAddTask(text, currentDate.toISOString());
 };
@@ -64,50 +80,67 @@ const TodoPage = ({ tasks, onAddTask }) => {
   };
 
 
-  const handleEditItem = (id, newText, newHours, newDays) => {
-    const updatedItems = items.map((item) => {
-      if (item.id === id) {
-        let finish = null;
-
-        if (newHours && newHours !== '') {
-          const finishDate = new Date();
-          finishDate.setHours(finishDate.getHours() + parseInt(newHours));
-          finish = finishDate.toISOString();
-        } else if (newDays && newDays !== '') {
-          const finishDate = new Date();
-          finishDate.setDate(finishDate.getDate() + parseInt(newDays));
-          finish = finishDate.toISOString();
+  const handleEditItem = async (item, newText, newHours, newDays) => {
+        // TODO
+        const updatedItem = {
+          text: newText
+          // start: newHours,
+          // days: newDays,
+        };
+        const token = localStorage.getItem('token')
+        const config = {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `bearer ${token}` }
         }
 
-        return { ...item, text: newText, hours: newHours, days: newDays, finish };
-      }
-      return item;
-    });
+        const response = await axios.patch(`http://localhost:3000/events/${item._id}`, updatedItem, config)
 
-    setItems(updatedItems);
-  };
+        const updatedData = await axios.get('http://localhost:3000/events', config)
+        const freshData = await updatedData.data
+        setItems(freshData)
+
+
+    // const updatedItems = items.map((item) => {
+    //   if (item.id === id) {
+    //     let finish = null;
+
+    //     if (newHours && newHours !== '') {
+    //       const finishDate = new Date();
+    //       finishDate.setHours(finishDate.getHours() + parseInt(newHours));
+    //       finish = finishDate.toISOString();
+    //     } else if (newDays && newDays !== '') {
+    //       const finishDate = new Date();
+    //       finishDate.setDate(finishDate.getDate() + parseInt(newDays));
+    //       finish = finishDate.toISOString();
+    //     }
+
+    //     return { ...item, text: newText, hours: newHours, days: newDays, finish };
+    //   }
+    //   return item;
+    };
 
 
   const TodoItem = ({ item, onToggleDone, onEditItem, onDeleteItem }) => {
     const handleToggle = () => {
-      onToggleDone(item.id);
+      onToggleDone(item._id);
     };
 
-    const handleEdit = () => {
-      const newText = prompt('Enter new text:', item.text);
-      if (newText !== null) {
-        const newTime = prompt('Enter new time (hours:days):', `${item.hours || ''}:${item.days || ''}`);
-        if (newTime !== null) {
-          const [newHours, newDays] = newTime.split(':');
-          onEditItem(item.id, newText.trim(), newHours.trim(), newDays.trim());
-        }
-      }
-    };
+    // const handleEdit = () => {
+    //   const newText = prompt('Enter new text:', item.text);
+    //   if (newText !== null) {
+    //     const newTime = prompt('Enter new time (hours:days):', `${item.hours || ''}:${item.days || ''}`);
+    //     if (newTime !== null) {
+    //       const [newHours, newDays] = newTime.split(':');
+    //       onEditItem(item.id, newText.trim(), newHours.trim(), newDays.trim());
+    //     }
+    //   }
+    // };
 
 
 
     const handleDelete = () => {
-      onDeleteItem(item.id, item.done);
+      onDeleteItem(item, item.done);
     };
 
     return (
@@ -123,13 +156,30 @@ const TodoPage = ({ tasks, onAddTask }) => {
 
 
 
-  const handleDeleteItem = (id, done) => {
+  const handleDeleteItem = async (item, done) => {
     if (done) {
       setPoints((prevPoints) => prevPoints - 100);
       setPoints((prevPoints) => prevPoints - 100);
     }
-    const updatedItems = items.filter((item) => item.id !== id);
-    setItems(updatedItems);
+
+    const token = localStorage.getItem('token')
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `bearer ${token}` }
+    }
+
+    const response = await axios.delete(`http://localhost:3000/events/${item._id}`, config)
+
+    const updatedData = await axios.get('http://localhost:3000/events', config)
+    const freshData = await updatedData.data
+    setItems(freshData)
+
+
+
+    // // old
+    // const updatedItems = items.filter((item) => item.id !== id);
+    // setItems(updatedItems);
   };
 
   const handleFilterTasks = () => {
@@ -189,7 +239,7 @@ const TodoPage = ({ tasks, onAddTask }) => {
         <button onClick={handleNextDay}>Tomorrow &#8594;</button>
       </div>
 
-      <TodoForm onAddItem={handleAddItem} />
+      <TodoForm onAddItem={handleAddItem} setItems={setItems} />
 
       <button onClick={handleToggleShowDone}>
         {showDoneTasks ? 'Show Todos' : 'Show Done'}
@@ -214,16 +264,41 @@ const TodoPage = ({ tasks, onAddTask }) => {
   );
 };
 
-const TodoForm = ({ onAddItem }) => {
+const TodoForm = ({ setItems, onAddItem }) => {
   const [text, setText] = useState('');
   const [hours, setHours] = useState('');
   const [days, setDays] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // TODO
+
+    const newItem = {
+      text: text
+      // start: null,
+      // days: null,
+      // done: false,
+    };
+    const token = localStorage.getItem('token')
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `bearer ${token}` }
+    }
+
+    const response = await axios.post('http://localhost:3000/events', newItem, config)
+    const createdItem = response.data
+
+    const updatedData = await axios.get('http://localhost:3000/events', config)
+    const freshData = await updatedData.data
+    setItems(freshData)
+
+
+
     if (text.trim()) {
       const dueDate = new Date();
-      onAddItem(text.trim(), dueDate);
+      onAddItem(updatedData, updatedData.text.trim(), dueDate);
       setText('');
       setHours('');
       setDays('');
@@ -260,7 +335,7 @@ const TodoList = ({ items, onToggleDone, onEditItem, onDeleteItem }) => {
     <ul>
       {items.map((item) => (
         <TodoItem
-          key={item.id}
+          key={item._id}
           item={item}
           onToggleDone={onToggleDone}
           onEditItem={onEditItem}
@@ -273,18 +348,20 @@ const TodoList = ({ items, onToggleDone, onEditItem, onDeleteItem }) => {
 
 const TodoItem = ({ item, onToggleDone, onEditItem, onDeleteItem }) => {
   const handleToggle = () => {
-    onToggleDone(item.id);
+    onToggleDone(item._id);
   };
 
   const handleEdit = (e) => {
+    e.preventDefault()
     const newText = prompt('Enter new text:', item.text);
+    console.log(item, 'edit l357')
     if (newText) {
-      onEditItem(item.id, newText.trim(), item.hours, item.days);
+      onEditItem(item, newText.trim(), item.hours, item.days);
     }
   };
 
   const handleDelete = () => {
-    onDeleteItem(item.id, item.done);
+    onDeleteItem(item, item.done);
   };
 
   const getDaysRemaining = (dueDate) => {
@@ -315,9 +392,9 @@ const TodoItem = ({ item, onToggleDone, onEditItem, onDeleteItem }) => {
       const dueDate = new Date(item.dueDate);
       const timeDifference = dueDate.getTime() - currentDate.getTime();
       const daysRemaining = Math.ceil(timeDifference / (1000 * 3600 * 24));
-  
+
       let colorClass = '';
-  
+
       if (daysRemaining >= 7) {
         colorClass = 'yellow';
       } else if (daysRemaining >= 3 && daysRemaining <= 6) {
@@ -325,7 +402,7 @@ const TodoItem = ({ item, onToggleDone, onEditItem, onDeleteItem }) => {
       } else {
         colorClass = 'red';
       }
-  
+
       return <span className={colorClass}>{daysRemaining} day(s) remaining</span>;
     }
   };
