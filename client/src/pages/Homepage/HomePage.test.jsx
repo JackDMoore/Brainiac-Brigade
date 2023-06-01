@@ -2,7 +2,7 @@ import React from "react";
 
 import HomePage from "../HomePage";
 
-// import userEvent from "@testing-library/user-event";
+import userEvent from "@testing-library/user-event";
 import { MemoryRouter as Router } from "react-router-dom";
 import { describe, it, expect, beforeEach, afterEach } from "vitest";
 import { screen, render, cleanup } from "@testing-library/react";
@@ -56,6 +56,13 @@ describe("Home Page", () => {
     const heading = screen.getByText("Click here to view your achievements.");
     expect(heading).toBeInTheDocument();
   });
+
+  it("Changes location when a Link is clicked", async () => {
+    expect("window.location.href").not.toContain("/urgent")
+    const link = screen.getAllByRole("link")
+    await userEvent.click(link)
+    expect(window.location.href).toContain("/urgent")
+})
 
   // it("Displays a calendar", () => {
   //   // const calendar = container.querySelector("#calendarID")
