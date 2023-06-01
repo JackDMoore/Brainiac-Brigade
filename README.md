@@ -13,13 +13,20 @@ If you want to run the app in your local machine:
 Clone the repo
 ```bash
 git clone git@github.com:JackDMoore/Brainiac-Brigade.git
+
+# cd inside the repo folder
+cd Brainiac-Brigade
 ```
 
 ### Server
 To install the server packages
 
 ```bash
+# from the repo root 
+# cd inside the api folder
 cd api
+
+# install packages
 npm install
 ```
 
@@ -29,7 +36,7 @@ touch .env
 
 # You need to add the following enviroment variables to the .env file:
 
-  # MongoDB URI (add your own URI)
+  # MongoDB URI (please create and add your own MongoDB URI)
   MONGODB_URI: mongodb+srv://username:password@host:port/database?options...
 
   # PORT
@@ -39,25 +46,53 @@ touch .env
   SECRET = "your secret"
 ```
 ### Client
+To install the server packages
 
-WIP
+```bash
+# from the repo root 
+# cd inside the client folder
+cd client
+
+# install packages
+npm install
+```
 
 ## How to start
 
-`npm run dev` in api file to set up the backend server
-`npm run dev` in client file to start the frontend of the app 
+### Start api server
+```bash
+# from the api folder
+npm run dev
+```
+You should see something like this in your terminal:
+
+![image](https://github.com/JackDMoore/Brainiac-Brigade/assets/17050237/89c53313-a3e0-4c8e-ac92-5a525687150f)
+
+
+### Start client server
+```bash
+# from the client folder
+npm run dev
+```
+You should see something like this in your terminal:
+
+![image](https://github.com/JackDMoore/Brainiac-Brigade/assets/17050237/c63851fd-ee17-4e1d-8e04-695ce53aa203)
 
 ## Technologies used
 
 - HTML
 - CSS
 - React
-- JSX
+- (React calendar library)[https://www.npmjs.com/package/react-calendar]
 - JS
 - Node
 - Vite
-- Redux
-- MongooseDB
+- MongoDB
 
+## Contributing
 
-## 
+Pull requests are welcome. For major changes, please open an issue first
+to discuss what you would like to change.
+
+Please make sure to update tests as appropriate.
+
