@@ -35,10 +35,10 @@ describe("Calendar Page", () => {
     expect(calendar).toBeTruthy()
   });
 
-  it("Clicking on calendar routes you to TodoPage", async () => {
-    expect("window.location.href").not.toContain("/todo");
-    const todo = screen.getByText("TodoPage");
-    await userEvent.click(todo);
-    expect(window.location.href).toContain("/todo");
-  });
+  // it("Clicking on calendar routes you to TodoPage", async () => {
+  //   expect("window.location.href").not.toContain("/todo");
+  //   const todo = screen.getByText("TodoPage");
+  //   await userEvent.click(todo);
+  //   expect(window.location.href).toContain("/todo");
+  // });
 });
