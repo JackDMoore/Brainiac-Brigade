@@ -25,3 +25,5 @@ describe('TodoPage', () => {
     expect(input).toBeChecked();
   });
 });
+
+// testing whether the component correctly adds new items when the form is submitted and toggles the done status of an item when it is clicked.
