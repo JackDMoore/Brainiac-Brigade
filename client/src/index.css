@@ -68,4 +68,7 @@ button:focus-visible {
   }
 } */
 
+.react-calendar__month-view__days__day--neighboringMonth {
+  color: #757575;
+}
 
