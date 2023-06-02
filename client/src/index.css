@@ -75,3 +75,11 @@ button:focus-visible {
 .react-calendar button {
   border-color: rgba(255, 255, 255, 0.225);
 }
+
+.react-calendar__month-view__weekdays {
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 0.75em;
+  margin-top: 10px;
+}
