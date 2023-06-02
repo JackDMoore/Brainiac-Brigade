@@ -5,11 +5,11 @@ const LoginPage = () => {
  
 
   return (
-    <>
+    <div className='input-container'>
         
         <Login/>
         
-    </>
+    </div>
   )
 }
 
