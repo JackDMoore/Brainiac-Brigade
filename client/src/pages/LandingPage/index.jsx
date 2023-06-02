@@ -26,8 +26,8 @@ const LandingPage = () => {
       <h1>Calendar To Do List</h1>
     </div>
     <div className="inner-box">
-      <p>Welcome to <b>Calendar To Do List</b>, the world's most famous scheduling site!</p>
-      <p>Be able to add/remove tasks and get rewarded with points from a to-do list connected to a calendar</p>
+      <p className='pi'>Welcome to <b>Calendar To Do List</b>, the world's most famous scheduling site!</p>
+      <p className='pi'>Be able to add/remove tasks and get rewarded with points from a to-do list connected to a calendar</p>
     </div>
     <button className="start-now-button">
         <Link to="/login" >Start Now</Link>
@@ -36,8 +36,8 @@ const LandingPage = () => {
     <div className="section-box">
       <section className={`inner-box ${revealAbout ? 'reveal' : ''}`}>
         <h2>About Us</h2>
-        <p>We wanted to create a place where students can revise and prepare by planning their tasks out.</p>
-        <p>We did this by creating a calendar app with a to-do list that gives points for each completed task.</p>
+        <p className='pi'>We wanted to create a place where students can revise and prepare by planning their tasks out.</p>
+        <p className='pi'>We did this by creating a calendar app with a to-do list that gives points for each completed task.</p>
       </section>
   </div>
     </main>
