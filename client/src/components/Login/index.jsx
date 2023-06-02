@@ -42,7 +42,7 @@ const Login = (props) => {
         <input type='text' aria-label='username input' placeholder='Enter Username' onChange={handleUsername} value={username} id='inputField'></input>
         {/* <p>Password: </p> */}
         <input type='password' aria-label='password input' placeholder='Enter Password' onChange={handlePassword} value={password} id='inputField'></input><br/>
-        <input type='submit' onClick={gatherDetails} id='submitBtn'></input>
+        <input type='submit' onClick={gatherDetails} id='submitBtn' aria-label='submit button'></input>
         <p>Not registered? <a href='/register'  style={{color: "#ffa600c5"}}>Register here</a></p>
     </form>
     </div>
