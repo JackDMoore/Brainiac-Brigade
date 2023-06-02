@@ -1,34 +1,77 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import './todo.css'
 
-const TodoPage = ({ tasks, onAddTask }) => {
+const TodoPage = () => {
   // getting the date from params
   const { date } = useParams()
   // converting data string to date format
   let showDate = new Date(date)
 
   const [items, setItems] = useState([]);
+  const [message, setMessage] = useState('')
   // setting initial date to be the one coming from params
   const [currentDate, setCurrentDate] = useState(showDate);
   const [points, setPoints] = useState(0);
-  const [showDoneTasks, setShowDoneTasks] = useState(true);
+  const [showDoneTasks, setShowDoneTasks] = useState(false);
   const [outstandingItems, setOutstandingItems] = useState([]);
 
-  useEffect(() => {
+  const fetchTodos = async () => {
     const token = localStorage.getItem('token')
     const config = {
       headers: {
         'Content-Type': 'application/json',
         Authorization: `bearer ${token}` }
     }
-    const fetchTodos = async () => {
-      const response = await axios.get('http://localhost:3000/events', config)
-      const data = await response.data
-      setItems(data)
+    const response = await axios.get('http://localhost:3000/events', config)
+    const data = await response.data
+    const todayData = data.filter(d => d.end === currentDate.toISOString())
+
+    setItems(todayData)
+  }
+
+  const fetchUserPoints = async () => {
+    const token = localStorage.getItem('token')
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `bearer ${token}` }
     }
+    const response = await axios.get('http://localhost:3000/users/points', config)
+    const data = await response.data
+    setPoints(data)
+  }
+
+  const updateUserPoints = async () => {
+    const token = localStorage.getItem('token')
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `bearer ${token}` }
+    }
+
+    const newPoints = { points: points }
+
+    const response = await axios.post('http://localhost:3000/users/points', newPoints, config)
+  }
+
+
+  useEffect(() => {
     fetchTodos()
   }, [])
+
+  useEffect(() => {
+    fetchUserPoints()
+  }, [])
+
+  useEffect(() => {
+    if(points != 0) {
+      updateUserPoints()
+    }
+  }, [points])
+
+
 
   useEffect(() => {
     const filteredOutstandingItems = items.filter(
@@ -44,39 +87,40 @@ const TodoPage = ({ tasks, onAddTask }) => {
 };
 
 
-  const handleToggleDone = (id) => {
-    const updatedItems = items.map((item) => {
-      if (item.id === id) {
-        let pointsToAdd = 0;
+  const handleToggleDone = async (item) => {
+    // done is being used backwards here because I couldnt fix the previous toggle properly
+    // done = false - completed
+    // done = true - incomplete
 
-        if (item.done) {
+    const updatedItem = { ...item, done: !item.done }
 
-          if (item.finish && new Date(item.finish) < currentDate) {
 
-            pointsToAdd = 50;
-          }
-        } else {
+    const token = localStorage.getItem('token')
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `bearer ${token}` }
+    }
 
-          if (item.finish && new Date(item.finish) < currentDate) {
+    const response = await axios.patch(`http://localhost:3000/events/${item._id}`, updatedItem, config)
 
-            pointsToAdd = 50;
-          } else {
+    if (item.done === false) {
+      setPoints((prevPoints) => prevPoints + 100)
+      setMessage(`todo: ${item.text} was marked as completed`)
+      setTimeout(() => {
+        setMessage(null)
+      }, 5000);
+    }
 
-            pointsToAdd = 100;
-          }
+    if (item.done === true) {
+      setPoints((prevPoints) => prevPoints - 100)
+      setMessage(`todo: ${item.text} was marked as incomplete`)
+      setTimeout(() => {
+        setMessage(null)
+      }, 5000);
+    }
 
-          setPoints((prevPoints) => prevPoints - 100);
-
-        }
-
-        const updatedItem = { ...item, done: !item.done };
-        setPoints((prevPoints) => prevPoints + pointsToAdd);
-        return updatedItem;
-      }
-      return item;
-    });
-
-    setItems(updatedItems);
+    fetchTodos()
   };
 
 
@@ -95,48 +139,14 @@ const TodoPage = ({ tasks, onAddTask }) => {
         }
 
         const response = await axios.patch(`http://localhost:3000/events/${item._id}`, updatedItem, config)
-
-        const updatedData = await axios.get('http://localhost:3000/events', config)
-        const freshData = await updatedData.data
-        setItems(freshData)
-
-
-    // const updatedItems = items.map((item) => {
-    //   if (item.id === id) {
-    //     let finish = null;
-
-    //     if (newHours && newHours !== '') {
-    //       const finishDate = new Date();
-    //       finishDate.setHours(finishDate.getHours() + parseInt(newHours));
-    //       finish = finishDate.toISOString();
-    //     } else if (newDays && newDays !== '') {
-    //       const finishDate = new Date();
-    //       finishDate.setDate(finishDate.getDate() + parseInt(newDays));
-    //       finish = finishDate.toISOString();
-    //     }
-
-    //     return { ...item, text: newText, hours: newHours, days: newDays, finish };
-    //   }
-    //   return item;
-    };
+        fetchTodos()
+  };
 
 
   const TodoItem = ({ item, onToggleDone, onEditItem, onDeleteItem }) => {
     const handleToggle = () => {
-      onToggleDone(item._id);
+      onToggleDone(item);
     };
-
-    // const handleEdit = () => {
-    //   const newText = prompt('Enter new text:', item.text);
-    //   if (newText !== null) {
-    //     const newTime = prompt('Enter new time (hours:days):', `${item.hours || ''}:${item.days || ''}`);
-    //     if (newTime !== null) {
-    //       const [newHours, newDays] = newTime.split(':');
-    //       onEditItem(item.id, newText.trim(), newHours.trim(), newDays.trim());
-    //     }
-    //   }
-    // };
-
 
 
     const handleDelete = () => {
@@ -145,15 +155,13 @@ const TodoPage = ({ tasks, onAddTask }) => {
 
     return (
       <li>
-        <input type="checkbox" checked={item.done} onChange={handleToggle} />
+        <input type="checkbox" checked={item.done} onClick={handleToggle} />
         <span className={item.done ? 'done' : ''}>{item.text}</span>
         <button onClick={handleEdit}>Edit</button>
         <button onClick={handleDelete}>Delete</button>
       </li>
     );
   };
-
-
 
 
   const handleDeleteItem = async (item, done) => {
@@ -171,15 +179,12 @@ const TodoPage = ({ tasks, onAddTask }) => {
 
     const response = await axios.delete(`http://localhost:3000/events/${item._id}`, config)
 
-    const updatedData = await axios.get('http://localhost:3000/events', config)
-    const freshData = await updatedData.data
-    setItems(freshData)
+    setMessage(`todo: ${item.text} was deleted`)
+    setTimeout(() => {
+      setMessage(null)
+    }, 5000);
 
-
-
-    // // old
-    // const updatedItems = items.filter((item) => item.id !== id);
-    // setItems(updatedItems);
+    fetchTodos()
   };
 
   const handleFilterTasks = () => {
@@ -195,57 +200,58 @@ const TodoPage = ({ tasks, onAddTask }) => {
   };
 
   const handlePreviousDay = () => {
-    setCurrentDate((prevDate) => {
-      const newDate = new Date(prevDate);
-      newDate.setDate(newDate.getDate() - 1);
-      return newDate;
-    });
+    let dateToChange = currentDate
+    let nextDate = dateToChange.setDate(dateToChange.getDate() - 1)
+
+    const dateFormatted = new Date(nextDate)
+    setCurrentDate(dateFormatted)
+    fetchTodos()
   };
 
   const handleNextDay = () => {
-    setCurrentDate((prevDate) => {
-      const newDate = new Date(prevDate);
-      newDate.setDate(newDate.getDate() + 1);
+    let dateToChange = currentDate
+    let nextDate = dateToChange.setDate(dateToChange.getDate() + 1)
 
-      const updatedItems = items.map((item) => {
-        if (!item.done) {
-          const finishDate = new Date(item.start);
-          const hoursToFinish = parseInt(item.hours);
-          const daysToFinish = parseInt(item.days);
-          finishDate.setHours(finishDate.getHours() + hoursToFinish);
-          finishDate.setDate(finishDate.getDate() + daysToFinish);
-
-          if (finishDate < newDate) {
-            return { ...item, start: null, finish: null };
-          }
-        }
-        return item;
-      });
-
-      setItems(updatedItems);
-      return newDate;
-    });
+    const dateFormatted = new Date(nextDate)
+    setCurrentDate(dateFormatted)
+    fetchTodos()
   };
+
+  const notificationStyle = {
+    color: "#FF8E3C",
+    background: '#242424',
+    fontSize: 20,
+    borderRadius: 25,
+    padding: 10,
+    marginBottom: 10,
+    marginTop: 20,
+    border: "1px solid #FF8E3C",
+  }
 
 
   return (
     <div>
-      <h2>{currentDate.toDateString()}</h2>
+      <h2 className='date-header'>{currentDate.toDateString()}</h2>
       {/* <h2>{showDate.toDateString()}</h2> */}
       <p>Points: {points}</p>
 
-      <div>
+      <div className='y-t-buttons'>
         <button onClick={handlePreviousDay}>&#8592; Yesterday</button>
         <button onClick={handleNextDay}>Tomorrow &#8594;</button>
       </div>
 
-      <TodoForm onAddItem={handleAddItem} setItems={setItems} />
 
-      <button onClick={handleToggleShowDone}>
-        {showDoneTasks ? 'Show Todos' : 'Show Done'}
+      <TodoForm onAddItem={handleAddItem} setItems={setItems} currentDate={currentDate} fetchTodos={fetchTodos} setMessage={setMessage}/>
+
+      <button className='show-button' onClick={handleToggleShowDone}>
+        {showDoneTasks ? 'Show Todos' : 'Show Completed'}
       </button>
 
-      <h3>{showDoneTasks ? 'Done Tasks' : 'Todo Tasks'}</h3>
+      {
+        message ? <div style={notificationStyle}>{message}</div> : null
+      }
+
+      <h3 className='todo-header'>{showDoneTasks ? 'Completed Tasks' : 'Todo Tasks'}</h3>
       <TodoList
         items={handleFilterTasks()}
         onToggleDone={handleToggleDone}
@@ -253,21 +259,21 @@ const TodoPage = ({ tasks, onAddTask }) => {
         onDeleteItem={handleDeleteItem}
       />
 
-      <h3>Outstanding Tasks</h3>
+      {/* <h3>Outstanding Tasks</h3>
       <TodoList
         items={outstandingItems}
         onToggleDone={handleToggleDone}
         onEditItem={handleEditItem}
         onDeleteItem={handleDeleteItem}
-      />
+      /> */}
     </div>
   );
 };
 
-const TodoForm = ({ setItems, onAddItem }) => {
+const TodoForm = ({ setItems, onAddItem, currentDate, fetchTodos, setMessage}) => {
   const [text, setText] = useState('');
-  const [hours, setHours] = useState('');
-  const [days, setDays] = useState('');
+  // const [hours, setHours] = useState('');
+  // const [days, setDays] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -275,11 +281,13 @@ const TodoForm = ({ setItems, onAddItem }) => {
     // TODO
 
     const newItem = {
-      text: text
+      text: text,
+      end: currentDate
       // start: null,
       // days: null,
       // done: false,
     };
+    console.log(newItem, 'l279')
     const token = localStorage.getItem('token')
     const config = {
       headers: {
@@ -290,49 +298,54 @@ const TodoForm = ({ setItems, onAddItem }) => {
     const response = await axios.post('http://localhost:3000/events', newItem, config)
     const createdItem = response.data
 
-    const updatedData = await axios.get('http://localhost:3000/events', config)
-    const freshData = await updatedData.data
-    setItems(freshData)
+    setMessage(`a new todo: ${createdItem.text} was added`)
+    setTimeout(() => {
+      setMessage(null)
+    }, 5000);
+
+    fetchTodos()
 
 
 
     if (text.trim()) {
       const dueDate = new Date();
-      onAddItem(updatedData, updatedData.text.trim(), dueDate);
+      onAddItem(dueDate);
       setText('');
-      setHours('');
-      setDays('');
+      // setHours('');
+      // setDays('');
     }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        type="text"
-        value={text}
-        onChange={(e) => setText(e.target.value)}
-        placeholder="Add a new task"
-      />
-      <input
-        type="number"
-        value={hours}
-        onChange={(e) => setHours(e.target.value)}
-        placeholder="Hours to complete"
-      />
-      <input
-        type="number"
-        value={days}
-        onChange={(e) => setDays(e.target.value)}
-        placeholder="Days to complete"
-      />
-      <button type="submit">Add</button>
-    </form>
+    <div className="form-container">
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+          placeholder="Add a new task"
+        />
+        {/* <input
+          type="number"
+          value={hours}
+          onChange={(e) => setHours(e.target.value)}
+          placeholder="Hours to complete"
+        />
+        <input
+          type="number"
+          value={days}
+          onChange={(e) => setDays(e.target.value)}
+          placeholder="Days to complete"
+        /> */}
+        <button id="add-button" type="submit">+</button>
+      </form>
+    </div>
   );
 };
 
 const TodoList = ({ items, onToggleDone, onEditItem, onDeleteItem }) => {
   return (
-    <ul>
+    <ul className='todo-list'>
       {items.map((item) => (
         <TodoItem
           key={item._id}
@@ -348,13 +361,12 @@ const TodoList = ({ items, onToggleDone, onEditItem, onDeleteItem }) => {
 
 const TodoItem = ({ item, onToggleDone, onEditItem, onDeleteItem }) => {
   const handleToggle = () => {
-    onToggleDone(item._id);
+    onToggleDone(item);
   };
 
   const handleEdit = (e) => {
     e.preventDefault()
     const newText = prompt('Enter new text:', item.text);
-    console.log(item, 'edit l357')
     if (newText) {
       onEditItem(item, newText.trim(), item.hours, item.days);
     }
@@ -411,12 +423,16 @@ const TodoItem = ({ item, onToggleDone, onEditItem, onDeleteItem }) => {
 
   return (
     <li>
-      <div>
-        <input type="checkbox" checked={item.done} onChange={handleToggle} />
-        <span className={item.done ? 'done' : ''}>{item.text}</span>
-        <span className={taskColor}>{daysRemaining} days left</span>
-        <button onClick={handleEdit}>Edit</button>
-        <button onClick={handleDelete}>Delete</button>
+      <div className='todos-container'>
+        <div>
+          <input type="checkbox" checked={item.done} onChange={handleToggle} />
+          <span id="todos-items" className={item.done ? 'done' : ''}>{item.text}</span>
+          {/* <span className={taskColor}>{daysRemaining} days left</span> */}
+        </div>
+        <div>
+          <button className="edit-button"onClick={handleEdit}>Edit</button>
+          <button className="delete-button"onClick={handleDelete}>Remove</button>
+        </div>
       </div>
     </li>
   );
