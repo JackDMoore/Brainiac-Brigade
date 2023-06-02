@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1685626280933" clover="3.2.0">
-  <project timestamp="1685626280933" name="All files">
-    <metrics statements="141" coveredstatements="76" conditionals="48" coveredconditionals="8" methods="10" coveredmethods="4" elements="199" coveredelements="88" complexity="0" loc="141" ncloc="141" packages="4" files="7" classes="7"/>
+<coverage generated="1685694491928" clover="3.2.0">
+  <project timestamp="1685694491928" name="All files">
+    <metrics statements="168" coveredstatements="80" conditionals="60" coveredconditionals="8" methods="12" coveredmethods="4" elements="240" coveredelements="92" complexity="0" loc="168" ncloc="168" packages="4" files="7" classes="7"/>
     <package name="api">
       <metrics statements="22" coveredstatements="21" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
-      <file name="app.js" path="/home/diegorramos/code/futureproof/lap3/Brainiac-Brigade/api/app.js">
+      <file name="app.js" path="C:\Users\tomic\Downloads\work\project-3\Brainiac-Brigade\api\app.js">
         <metrics statements="22" coveredstatements="21" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
         <line num="1" count="2" type="stmt"/>
         <line num="2" count="2" type="stmt"/>
@@ -31,8 +31,8 @@
       </file>
     </package>
     <package name="api.controllers">
-      <metrics statements="95" coveredstatements="31" conditionals="48" coveredconditionals="8" methods="8" coveredmethods="2"/>
-      <file name="events.js" path="/home/diegorramos/code/futureproof/lap3/Brainiac-Brigade/api/controllers/events.js">
+      <metrics statements="120" coveredstatements="33" conditionals="60" coveredconditionals="8" methods="10" coveredmethods="2"/>
+      <file name="events.js" path="C:\Users\tomic\Downloads\work\project-3\Brainiac-Brigade\api\controllers\events.js">
         <metrics statements="67" coveredstatements="13" conditionals="36" coveredconditionals="2" methods="5" coveredmethods="1"/>
         <line num="1" count="2" type="stmt"/>
         <line num="2" count="2" type="stmt"/>
@@ -102,8 +102,8 @@
         <line num="155" count="0" type="stmt"/>
         <line num="160" count="2" type="stmt"/>
       </file>
-      <file name="users.js" path="/home/diegorramos/code/futureproof/lap3/Brainiac-Brigade/api/controllers/users.js">
-        <metrics statements="28" coveredstatements="18" conditionals="12" coveredconditionals="6" methods="3" coveredmethods="1"/>
+      <file name="users.js" path="C:\Users\tomic\Downloads\work\project-3\Brainiac-Brigade\api\controllers\users.js">
+        <metrics statements="53" coveredstatements="20" conditionals="24" coveredconditionals="6" methods="5" coveredmethods="1"/>
         <line num="1" count="2" type="stmt"/>
         <line num="2" count="2" type="stmt"/>
         <line num="3" count="2" type="stmt"/>
@@ -132,28 +132,53 @@
         <line num="64" count="0" type="stmt"/>
         <line num="66" count="0" type="stmt"/>
         <line num="72" count="2" type="stmt"/>
+        <line num="73" count="0" type="stmt"/>
+        <line num="74" count="0" type="stmt"/>
+        <line num="77" count="0" type="stmt"/>
+        <line num="78" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="79" count="0" type="stmt"/>
+        <line num="83" count="0" type="stmt"/>
+        <line num="84" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="85" count="0" type="stmt"/>
+        <line num="88" count="0" type="stmt"/>
+        <line num="90" count="0" type="stmt"/>
+        <line num="92" count="0" type="stmt"/>
+        <line num="93" count="0" type="stmt"/>
+        <line num="96" count="2" type="stmt"/>
+        <line num="97" count="0" type="stmt"/>
+        <line num="98" count="0" type="stmt"/>
+        <line num="101" count="0" type="stmt"/>
+        <line num="102" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="103" count="0" type="stmt"/>
+        <line num="107" count="0" type="stmt"/>
+        <line num="108" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="109" count="0" type="stmt"/>
+        <line num="112" count="0" type="stmt"/>
+        <line num="113" count="0" type="stmt"/>
+        <line num="114" count="0" type="stmt"/>
+        <line num="117" count="2" type="stmt"/>
       </file>
     </package>
     <package name="api.models">
       <metrics statements="8" coveredstatements="8" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-      <file name="Event.js" path="/home/diegorramos/code/futureproof/lap3/Brainiac-Brigade/api/models/Event.js">
+      <file name="Event.js" path="C:\Users\tomic\Downloads\work\project-3\Brainiac-Brigade\api\models\Event.js">
         <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="2" type="stmt"/>
         <line num="3" count="2" type="stmt"/>
         <line num="20" count="2" type="stmt"/>
         <line num="22" count="2" type="stmt"/>
       </file>
-      <file name="User.js" path="/home/diegorramos/code/futureproof/lap3/Brainiac-Brigade/api/models/User.js">
+      <file name="User.js" path="C:\Users\tomic\Downloads\work\project-3\Brainiac-Brigade\api\models\User.js">
         <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="2" type="stmt"/>
         <line num="3" count="2" type="stmt"/>
-        <line num="15" count="2" type="stmt"/>
-        <line num="17" count="2" type="stmt"/>
+        <line num="16" count="2" type="stmt"/>
+        <line num="18" count="2" type="stmt"/>
       </file>
     </package>
     <package name="api.routes">
-      <metrics statements="16" coveredstatements="16" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-      <file name="events.js" path="/home/diegorramos/code/futureproof/lap3/Brainiac-Brigade/api/routes/events.js">
+      <metrics statements="18" coveredstatements="18" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="events.js" path="C:\Users\tomic\Downloads\work\project-3\Brainiac-Brigade\api\routes\events.js">
         <metrics statements="9" coveredstatements="9" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="2" type="stmt"/>
         <line num="2" count="2" type="stmt"/>
@@ -165,15 +190,17 @@
         <line num="10" count="2" type="stmt"/>
         <line num="12" count="2" type="stmt"/>
       </file>
-      <file name="users.js" path="/home/diegorramos/code/futureproof/lap3/Brainiac-Brigade/api/routes/users.js">
-        <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="users.js" path="C:\Users\tomic\Downloads\work\project-3\Brainiac-Brigade\api\routes\users.js">
+        <metrics statements="9" coveredstatements="9" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="2" type="stmt"/>
         <line num="2" count="2" type="stmt"/>
         <line num="3" count="2" type="stmt"/>
         <line num="5" count="2" type="stmt"/>
         <line num="6" count="2" type="stmt"/>
         <line num="7" count="2" type="stmt"/>
+        <line num="8" count="2" type="stmt"/>
         <line num="9" count="2" type="stmt"/>
+        <line num="11" count="2" type="stmt"/>
       </file>
     </package>
   </project>

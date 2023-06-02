@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1685671420032" clover="3.2.0">
-  <project timestamp="1685671420032" name="All files">
+<coverage generated="1685694377539" clover="3.2.0">
+  <project timestamp="1685694377539" name="All files">
     <metrics statements="940" coveredstatements="605" conditionals="55" coveredconditionals="40" methods="41" coveredmethods="24" elements="1036" coveredelements="669" complexity="0" loc="940" ncloc="940" packages="9" files="9" classes="9"/>
     <package name="components.Login">
       <metrics statements="53" coveredstatements="46" conditionals="6" coveredconditionals="4" methods="4" coveredmethods="4"/>
-      <file name="index.jsx" path="D:\Coding courses\LFA\lap3\project\Brainiac-Brigade\client\src\components\Login\index.jsx">
+      <file name="index.jsx" path="C:\Users\tomic\Downloads\work\project-3\Brainiac-Brigade\client\src\components\Login\index.jsx">
         <metrics statements="53" coveredstatements="46" conditionals="6" coveredconditionals="4" methods="4" coveredmethods="4"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -63,7 +63,7 @@
     </package>
     <package name="components.PageWrapper">
       <metrics statements="23" coveredstatements="23" conditionals="4" coveredconditionals="4" methods="2" coveredmethods="2"/>
-      <file name="index.jsx" path="D:\Coding courses\LFA\lap3\project\Brainiac-Brigade\client\src\components\PageWrapper\index.jsx">
+      <file name="index.jsx" path="C:\Users\tomic\Downloads\work\project-3\Brainiac-Brigade\client\src\components\PageWrapper\index.jsx">
         <metrics statements="23" coveredstatements="23" conditionals="4" coveredconditionals="4" methods="2" coveredmethods="2"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -92,7 +92,7 @@
     </package>
     <package name="components.Register">
       <metrics statements="58" coveredstatements="50" conditionals="6" coveredconditionals="4" methods="4" coveredmethods="4"/>
-      <file name="index.jsx" path="D:\Coding courses\LFA\lap3\project\Brainiac-Brigade\client\src\components\Register\index.jsx">
+      <file name="index.jsx" path="C:\Users\tomic\Downloads\work\project-3\Brainiac-Brigade\client\src\components\Register\index.jsx">
         <metrics statements="58" coveredstatements="50" conditionals="6" coveredconditionals="4" methods="4" coveredmethods="4"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -156,7 +156,7 @@
     </package>
     <package name="pages.AchievementsPage">
       <metrics statements="125" coveredstatements="108" conditionals="12" coveredconditionals="10" methods="4" coveredmethods="3"/>
-      <file name="index.jsx" path="D:\Coding courses\LFA\lap3\project\Brainiac-Brigade\client\src\pages\AchievementsPage\index.jsx">
+      <file name="index.jsx" path="C:\Users\tomic\Downloads\work\project-3\Brainiac-Brigade\client\src\pages\AchievementsPage\index.jsx">
         <metrics statements="125" coveredstatements="108" conditionals="12" coveredconditionals="10" methods="4" coveredmethods="3"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -287,7 +287,7 @@
     </package>
     <package name="pages.CalendarPage">
       <metrics statements="28" coveredstatements="26" conditionals="3" coveredconditionals="2" methods="1" coveredmethods="1"/>
-      <file name="index.jsx" path="D:\Coding courses\LFA\lap3\project\Brainiac-Brigade\client\src\pages\CalendarPage\index.jsx">
+      <file name="index.jsx" path="C:\Users\tomic\Downloads\work\project-3\Brainiac-Brigade\client\src\pages\CalendarPage\index.jsx">
         <metrics statements="28" coveredstatements="26" conditionals="3" coveredconditionals="2" methods="1" coveredmethods="1"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -321,7 +321,7 @@
     </package>
     <package name="pages.Homepage">
       <metrics statements="70" coveredstatements="70" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
-      <file name="index.jsx" path="D:\Coding courses\LFA\lap3\project\Brainiac-Brigade\client\src\pages\Homepage\index.jsx">
+      <file name="index.jsx" path="C:\Users\tomic\Downloads\work\project-3\Brainiac-Brigade\client\src\pages\Homepage\index.jsx">
         <metrics statements="70" coveredstatements="70" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -397,7 +397,7 @@
     </package>
     <package name="pages.LandingPage">
       <metrics statements="47" coveredstatements="42" conditionals="4" coveredconditionals="3" methods="2" coveredmethods="1"/>
-      <file name="index.jsx" path="D:\Coding courses\LFA\lap3\project\Brainiac-Brigade\client\src\pages\LandingPage\index.jsx">
+      <file name="index.jsx" path="C:\Users\tomic\Downloads\work\project-3\Brainiac-Brigade\client\src\pages\LandingPage\index.jsx">
         <metrics statements="47" coveredstatements="42" conditionals="4" coveredconditionals="3" methods="2" coveredmethods="1"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -450,7 +450,7 @@
     </package>
     <package name="pages.TodoPage">
       <metrics statements="441" coveredstatements="189" conditionals="17" coveredconditionals="10" methods="18" coveredmethods="6"/>
-      <file name="index.jsx" path="D:\Coding courses\LFA\lap3\project\Brainiac-Brigade\client\src\pages\TodoPage\index.jsx">
+      <file name="index.jsx" path="C:\Users\tomic\Downloads\work\project-3\Brainiac-Brigade\client\src\pages\TodoPage\index.jsx">
         <metrics statements="441" coveredstatements="189" conditionals="17" coveredconditionals="10" methods="18" coveredmethods="6"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -897,7 +897,7 @@
     </package>
     <package name="pages.UrgentPage">
       <metrics statements="95" coveredstatements="51" conditionals="2" coveredconditionals="2" methods="5" coveredmethods="2"/>
-      <file name="index.jsx" path="D:\Coding courses\LFA\lap3\project\Brainiac-Brigade\client\src\pages\UrgentPage\index.jsx">
+      <file name="index.jsx" path="C:\Users\tomic\Downloads\work\project-3\Brainiac-Brigade\client\src\pages\UrgentPage\index.jsx">
         <metrics statements="95" coveredstatements="51" conditionals="2" coveredconditionals="2" methods="5" coveredmethods="2"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
