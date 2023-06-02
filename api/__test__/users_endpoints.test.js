@@ -82,6 +82,34 @@ describe('api server', () => {
     expect(usersAtEnd).toHaveLength(usersAtStart.length)
 
   })
+
+  test('user can login', async() => {
+    const newUser = {
+      username: 'diegorramos',
+      name: 'test',
+      password: 'test'
+    }
+    const response = await api.post('/users/login').send(newUser)
+
+    expect(response.status).toBe(200)
+
+  })
+
+  test('user points can be updated', async() => {
+    const newUser = {
+      username: 'diegorramos',
+      name: 'test',
+      password: 'test'
+    }
+    const response = await api.post('/users/login').send(newUser)
+
+    let token = response.data.token
+
+    const response2 = await api.post('/users/points').send(newUser)
+
+    expect(response.status).toBe(200)
+  })
+
 })
 
 afterAll(() => {
