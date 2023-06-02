@@ -47,7 +47,7 @@ const Login = (props) => {
         <button onClick={gatherDetails} id='submitBtn' aria-label='submit button'>
         Submit
       </button>
-        <p>Not registered? <a href='/register'  style={{color: "#ffa600c5"}}>Register here</a></p>
+        <p>Not registered? <a href='/register'  style={{color: "#FF8E3C"}}>Register here</a></p>
     </form>
     </div>
   )
