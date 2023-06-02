@@ -79,3 +79,7 @@ button:focus-visible {
 .react-calendar button:hover {
   border-color: #FF8E3C;
 }
+
+.react-calendar {
+  color:rgba(255, 255, 255, 0.87);
+}
