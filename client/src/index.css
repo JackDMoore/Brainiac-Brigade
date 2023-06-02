@@ -72,3 +72,6 @@ button:focus-visible {
   color: #757575;
 }
 
+.react-calendar button {
+  border-color: rgba(255, 255, 255, 0.225);
+}
