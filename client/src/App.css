@@ -63,6 +63,9 @@
 }
 
 .box2 {
+  background-image: url('./assets/2468d56ba572da8ab5834fab5386c767.gif');
+  background-position: center;
+    background-size: cover;
   float: right;
   width: 30%;
 
@@ -83,6 +86,9 @@
 }
 
 .box3 {
+  background-image: url('./assets/png-transparent-competition-award-computer-icons-trophy-prize-award-medal-orange-logo.png');
+  background-position: center;
+  background-size: cover;
   float: left;
   padding: 2em;
   border: solid 1px;
