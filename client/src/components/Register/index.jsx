@@ -47,7 +47,7 @@ const Register = () => {
           
           {/* <p>Password: </p> */}
           <input type='password' aria-label='password input' placeholder='Enter Password' onChange={handlePassword} value={password} id='inputField'></input><br/>
-          <input type='submit' onClick={gatherDetails} id='submitBtn'></input>
+          <input type='submit' onClick={gatherDetails} id='submitBtn' aria-label='submit button'></input>
           <p>Already registered? <a href='/login'  style={{color: "#ffa600c5"}}>Login here</a></p>
           
       </form>
