@@ -8,7 +8,7 @@ const AchievementsPage = () => {
   const columns = React.useMemo(
     () => [
       { Header: showWeek ? 'Days' : 'Months', accessor: 'time' },
-      { Header: 'Tasks Recieved', accessor: 'tasksRequired' },
+      { Header: 'Tasks Received', accessor: 'tasksRequired' },
       { Header: 'Tasks Completed', accessor: 'tasksCompleted' },
       { Header: 'Points Earned', accessor: 'pointsEarned' },
       {
