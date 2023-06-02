@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import axios from 'axios'
+import "../Login/index.css"
 
 const Login = (props) => {
   const [username, setUsername] = useState("")
@@ -33,18 +34,19 @@ const Login = (props) => {
 
 
   return (
-    <>
-    
+    <div className='input-component'>
+    <h1>Login Page</h1>
 
-    <form className='input-container'>
+    <form className='inputs'>
         
-        <p>Username: </p>
-        <input type='text' aria-label='username input' placeholder='Enter Username' onChange={handleUsername} value={username}></input>
-        <p>Password: </p>
-        <input type='password' aria-label='password input' placeholder='Enter Password' onChange={handlePassword} value={password}></input><br/>
-        <input type='submit' onClick={gatherDetails}></input>
+        {/* <p>Username: </p> */}
+        <input type='text' aria-label='username input' placeholder='Enter Username' onChange={handleUsername} value={username} id='inputField'></input>
+        {/* <p>Password: </p> */}
+        <input type='password' aria-label='password input' placeholder='Enter Password' onChange={handlePassword} value={password} id='inputField'></input><br/>
+        <input type='submit' onClick={gatherDetails} id='submitBtn' aria-label='submit button'></input>
+        <p>Not registered? <a href='/register'  style={{color: "#ffa600c5"}}>Register here</a></p>
     </form>
-    </>
+    </div>
   )
 }
 

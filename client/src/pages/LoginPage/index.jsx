@@ -5,11 +5,11 @@ const LoginPage = () => {
  
 
   return (
-    <>
-        <h1>Login Page</h1>
+    <div className='input-container'>
+        
         <Login/>
-        <p>Not registered? <a href='/register'>Register</a></p>
-    </>
+        
+    </div>
   )
 }
 

@@ -6,13 +6,13 @@ import matchers from '@testing-library/jest-dom/matchers';
 expect.extend(matchers);
 import axios from "axios"
 
-import Login from "../Login"
+import Register from '.';
 
-describe("Login Component", () =>{
+describe("Register Component", () =>{
     beforeEach(() => {
         render (
             <MemoryRouter>
-                <Login/>
+                <Register/>
             </MemoryRouter>
         )
     })
@@ -52,7 +52,7 @@ describe("Login Component", () =>{
         const submitButton = screen.getByLabelText("submit button")
         submitButton.click()
 
-        expect(axiosspy).toHaveBeenCalledWith("https://brainiac-api.onrender.com/users/login",expect.any(Object))
+        expect(axiosspy).toHaveBeenCalledWith("https://brainiac-api.onrender.com/users",expect.any(Object))
     })
 
     // it("Is there a local token after logging in?")

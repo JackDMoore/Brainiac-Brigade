@@ -1,11 +1,41 @@
 #submitBtn{
-    margin: 15px;
+    margin: 7px;
+    
 }
 
 #inputField{
     padding: 5px;
+    margin-top: 15px;
 }
 
 p {
     margin-bottom: 8px;
 }
+.input-container{
+    /* background-color: brown; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.input-component{
+    display: flex;
+    
+    flex-direction: column;
+    /* max-width: 50%; */
+    justify-content: center;
+    align-items: center;
+    /* background-color: blue; */
+}
+
+
+.inputs{
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+    max-width: 70%;
+}
+
+/* .inputs input{
+    padd
+} */
