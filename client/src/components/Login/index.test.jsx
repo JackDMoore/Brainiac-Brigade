@@ -36,23 +36,25 @@ describe("Login Component", () =>{
         expect(passwordInput.value).toEqual("areCool")
     })
 
-    it("axios should post when submit is clicked", async () => {
-        const submit = screen.getByLabelText("submit button")
+    it("is gatherDetails called after submit is clicked", () => {
+        vi.spyOn(axios, "post")
 
-        const axiosmock = vi.spyOn(axios, "post")
-        //spies on axios.post to track usage
-        axiosmock.mockResolvedValueOnce({status:200, data: {token: "testing"}})
-        //mockresolvedvalueonce, vitest provided method, allows to setup mock response for mock func. Specifies value mock func should return when called
-        fireEvent.click(submit)
+        const submitButton = screen.getByLabelText("submit button")
+        submitButton.click()
 
-        await axios(() => {
-            expect(axiosmock).toHaveBeenCalledWith("http://localhost:3000/users/login",{username:"", password:""})
-        })
-        
+        expect(axios.post).toHaveBeenCalled()
+
     })
 
+    it("is api called with button click?", () => {
+        const axiosspy= vi.spyOn(axios, "post")
 
+        const submitButton = screen.getByLabelText("submit button")
+        submitButton.click()
 
+        expect(axiosspy).toHaveBeenCalledWith("https://brainiac-api.onrender.com/users/login",expect.any(Object))
+    })
 
+    // it("Is there a local token after logging in?")
 
 })
