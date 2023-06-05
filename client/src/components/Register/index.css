@@ -1,10 +1,10 @@
 #submitBtn{
     margin: 7px;
     color: #FF8E3C;
-    
+
 }
 
-#inputField{
+.inputField{
     padding: 5px;
     margin-top: 15px;
 }
@@ -20,7 +20,7 @@ p {
 }
 .input-component{
     display: flex;
-    
+
     flex-direction: column;
     /* max-width: 50%; */
     justify-content: center;

@@ -68,18 +68,20 @@ button:focus-visible {
   }
 } */
 
-.react-calendar__month-view__days__day--neighboringMonth {
-  color: #757575;
+.react-calendar {
+  color:rgba(255, 255, 255, 0.87);
+
 }
 
 .react-calendar button {
   border-color: rgba(255, 255, 255, 0.225);
+  color:white
+}
+
+.react-calendar__month-view__days__day--neighboringMonth {
+  color: #757575;
 }
 
 .react-calendar button:hover {
   border-color: #FF8E3C;
-}
-
-.react-calendar {
-  color:rgba(255, 255, 255, 0.87);
 }

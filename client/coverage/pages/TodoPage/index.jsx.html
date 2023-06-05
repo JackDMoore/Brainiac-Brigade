@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">42.85% </span>
+                <span class="strong">43.34% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>189/441</span>
+                <span class='fraction'>189/436</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">42.85% </span>
+                <span class="strong">43.34% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>189/441</span>
+                <span class='fraction'>189/436</span>
             </div>
         
             
@@ -499,12 +499,7 @@
 <a name='L434'></a><a href='#L434'>434</a>
 <a name='L435'></a><a href='#L435'>435</a>
 <a name='L436'></a><a href='#L436'>436</a>
-<a name='L437'></a><a href='#L437'>437</a>
-<a name='L438'></a><a href='#L438'>438</a>
-<a name='L439'></a><a href='#L439'>439</a>
-<a name='L440'></a><a href='#L440'>440</a>
-<a name='L441'></a><a href='#L441'>441</a>
-<a name='L442'></a><a href='#L442'>442</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L437'></a><a href='#L437'>437</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -594,11 +589,6 @@
 <span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-yes">8x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -971,7 +961,7 @@ const TodoPage = () =&gt; {
         'Content-Type': 'application/json',
         Authorization: `bearer ${token}` }
     }
-    const response = await axios.get('http://localhost:3000/events', config<span class="branch-0 cbranch-no" title="branch not covered" >)</span>
+    const response = await axios.get('https://brainiac-api.onrender.com/events', config<span class="branch-0 cbranch-no" title="branch not covered" >)</span>
 <span class="cstat-no" title="statement not covered" >    const data = await response.data</span>
 <span class="cstat-no" title="statement not covered" >    const todayData = data.filter(d =&gt; d.end === currentDate.toISOString())</span>
 <span class="cstat-no" title="statement not covered" ></span>
@@ -985,7 +975,7 @@ const TodoPage = () =&gt; {
         'Content-Type': 'application/json',
         Authorization: `bearer ${token}` }
     }
-    const response = await axios.get('http://localhost:3000/users/points', config<span class="branch-0 cbranch-no" title="branch not covered" >)</span>
+    const response = await axios.get('https://brainiac-api.onrender.com/users/points', config<span class="branch-0 cbranch-no" title="branch not covered" >)</span>
 <span class="cstat-no" title="statement not covered" >    const data = await response.data</span>
 <span class="cstat-no" title="statement not covered" >    setPoints(data)</span>
   }
@@ -1000,7 +990,7 @@ const TodoPage = () =&gt; {
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >    const newPoints = { points: points }</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >    const response = await axios.post('http://localhost:3000/users/points', newPoints, config)</span>
+<span class="cstat-no" title="statement not covered" >    const response = await axios.post('https://brainiac-api.onrender.com/users/points', newPoints, config)</span>
 <span class="cstat-no" title="statement not covered" >  }</span>
 &nbsp;
 &nbsp;
@@ -1035,12 +1025,7 @@ const TodoPage = () =&gt; {
 &nbsp;
 &nbsp;
   const handleToggleDone = <span class="fstat-no" title="function not covered" >async (item) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    // done is being used backwards here because I couldnt fix the previous toggle properly</span>
-<span class="cstat-no" title="statement not covered" >    // done = false - completed</span>
-<span class="cstat-no" title="statement not covered" >    // done = true - incomplete</span>
-<span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >    const updatedItem = { ...item, done: !item.done }</span>
-<span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >    const token = localStorage.getItem('token')</span>
 <span class="cstat-no" title="statement not covered" >    const config = {</span>
@@ -1049,7 +1034,7 @@ const TodoPage = () =&gt; {
 <span class="cstat-no" title="statement not covered" >        Authorization: `bearer ${token}` }</span>
 <span class="cstat-no" title="statement not covered" >    }</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >    const response = await axios.patch(`http://localhost:3000/events/${item._id}`, updatedItem, config)</span>
+<span class="cstat-no" title="statement not covered" >    const response = await axios.patch(`https://brainiac-api.onrender.com/events/${item._id}`, updatedItem, config)</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >    if (item.done === false) {</span>
 <span class="cstat-no" title="statement not covered" >      setPoints((prevPoints) =&gt; prevPoints + 100)</span>
@@ -1085,7 +1070,7 @@ const TodoPage = () =&gt; {
 <span class="cstat-no" title="statement not covered" >            Authorization: `bearer ${token}` }</span>
 <span class="cstat-no" title="statement not covered" >        }</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >        const response = await axios.patch(`http://localhost:3000/events/${item._id}`, updatedItem, config)</span>
+<span class="cstat-no" title="statement not covered" >        const response = await axios.patch(`https://brainiac-api.onrender.com/events/${item._id}`, updatedItem, config)</span>
 <span class="cstat-no" title="statement not covered" >        fetchTodos()</span>
 <span class="cstat-no" title="statement not covered" >  };</span>
 &nbsp;
@@ -1124,7 +1109,7 @@ const TodoPage = () =&gt; {
 <span class="cstat-no" title="statement not covered" >        Authorization: `bearer ${token}` }</span>
 <span class="cstat-no" title="statement not covered" >    }</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >    const response = await axios.delete(`http://localhost:3000/events/${item._id}`, config)</span>
+<span class="cstat-no" title="statement not covered" >    const response = await axios.delete(`https://brainiac-api.onrender.com/events/${item._id}`, config)</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >    setMessage(`todo: ${item.text} was deleted`)</span>
 <span class="cstat-no" title="statement not covered" >    setTimeout(() =&gt; {</span>
@@ -1242,7 +1227,7 @@ const TodoForm = ({ setItems, onAddItem, currentDate, fetchTodos, setMessage}) =
 <span class="cstat-no" title="statement not covered" >        Authorization: `bearer ${token}` }</span>
 <span class="cstat-no" title="statement not covered" >    }</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >    const response = await axios.post('http://localhost:3000/events', newItem, config)</span>
+<span class="cstat-no" title="statement not covered" >    const response = await axios.post('https://brainiac-api.onrender.com/events', newItem, config)</span>
 <span class="cstat-no" title="statement not covered" >    const createdItem = response.data</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >    setMessage(`a new todo: ${createdItem.text} was added`)</span>
@@ -1393,7 +1378,7 @@ export default TodoPage;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-06-02T08:26:17.454Z
+                at 2023-06-02T12:38:38.363Z
             </div>
         <script src="../../prettify.js"></script>
         <script>
