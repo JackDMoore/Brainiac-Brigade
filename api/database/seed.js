@@ -24,10 +24,8 @@ async function seedDB() {
       points: 800
     })
     let savedUser = await newUser.save()
-    console.log('user saved')
 
     let getUser = await User.findOne({ "username": username })
-    console.log(getUser._id)
 
     let newEvent = new Event ({
       text: 'Finish final presentation',

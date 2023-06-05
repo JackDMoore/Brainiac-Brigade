@@ -24,7 +24,7 @@ const TodoPage = () => {
         'Content-Type': 'application/json',
         Authorization: `bearer ${token}` }
     }
-    const response = await axios.get('http://localhost:3000/events', config)
+    const response = await axios.get('https://brainiac-api.onrender.com/events', config)
     const data = await response.data
     const todayData = data.filter(d => d.end === currentDate.toISOString())
 
@@ -38,7 +38,7 @@ const TodoPage = () => {
         'Content-Type': 'application/json',
         Authorization: `bearer ${token}` }
     }
-    const response = await axios.get('http://localhost:3000/users/points', config)
+    const response = await axios.get('https://brainiac-api.onrender.com/users/points', config)
     const data = await response.data
     setPoints(data)
   }
@@ -53,7 +53,7 @@ const TodoPage = () => {
 
     const newPoints = { points: points }
 
-    const response = await axios.post('http://localhost:3000/users/points', newPoints, config)
+    const response = await axios.post('https://brainiac-api.onrender.com/users/points', newPoints, config)
   }
 
 
@@ -88,12 +88,7 @@ const TodoPage = () => {
 
 
   const handleToggleDone = async (item) => {
-    // done is being used backwards here because I couldnt fix the previous toggle properly
-    // done = false - completed
-    // done = true - incomplete
-
     const updatedItem = { ...item, done: !item.done }
-
 
     const token = localStorage.getItem('token')
     const config = {
@@ -102,7 +97,7 @@ const TodoPage = () => {
         Authorization: `bearer ${token}` }
     }
 
-    const response = await axios.patch(`http://localhost:3000/events/${item._id}`, updatedItem, config)
+    const response = await axios.patch(`https://brainiac-api.onrender.com/events/${item._id}`, updatedItem, config)
 
     if (item.done === false) {
       setPoints((prevPoints) => prevPoints + 100)
@@ -138,7 +133,7 @@ const TodoPage = () => {
             Authorization: `bearer ${token}` }
         }
 
-        const response = await axios.patch(`http://localhost:3000/events/${item._id}`, updatedItem, config)
+        const response = await axios.patch(`https://brainiac-api.onrender.com/events/${item._id}`, updatedItem, config)
         fetchTodos()
   };
 
@@ -177,7 +172,7 @@ const TodoPage = () => {
         Authorization: `bearer ${token}` }
     }
 
-    const response = await axios.delete(`http://localhost:3000/events/${item._id}`, config)
+    const response = await axios.delete(`https://brainiac-api.onrender.com/events/${item._id}`, config)
 
     setMessage(`todo: ${item.text} was deleted`)
     setTimeout(() => {
@@ -295,7 +290,7 @@ const TodoForm = ({ setItems, onAddItem, currentDate, fetchTodos, setMessage}) =
         Authorization: `bearer ${token}` }
     }
 
-    const response = await axios.post('http://localhost:3000/events', newItem, config)
+    const response = await axios.post('https://brainiac-api.onrender.com/events', newItem, config)
     const createdItem = response.data
 
     setMessage(`a new todo: ${createdItem.text} was added`)
